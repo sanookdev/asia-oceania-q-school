@@ -1,8 +1,6 @@
 <?
 session_start();
-if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
-    header('Location: ./logout.php');
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -139,8 +137,30 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
 
     <script>
     $(document).ready(() => {
-        const username = <?= json_encode($_SESSION['user']);?>;
-        const personal_id = <?= json_encode($_SESSION['personal_id']);?>;
+        const username = <?= json_encode($_POST['username']);?>;
+        const password = <?= json_encode($_POST['password']);?>;
+        console.log(username);
+        console.log(password);
+
+        var personal_id = '';
+        var data = {};
+        if (username != null && password != null) {
+            data['username'] = username;
+            data['password'] = password;
+            axios.post('./api/informations.php', {
+                action: 'checkLogin',
+                data: data
+            }).then((res) => {
+                console.log(res);
+                personal_id = res.data.personal_id;
+                getProfile();
+            })
+        } else {
+            alert('you dont have permission.');
+            window.location.href = "./logout.php";
+        }
+
+
         callpdf = (personal_id) => {
             if (personal_id != '') {
                 window.open('./api/previewPdf.php?personal_id=' + personal_id);
@@ -176,49 +196,57 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
             })
         }
         editProfile = () => {
-            window.location.href = "./editForm.php";
+            window.open("./editForm.php?user=" + username + "&personal_id=" + personal_id);
         }
 
-        axios.post('./api/informations.php', {
-            action: 'myRegister',
-            personal_id: personal_id
-        }).then((res) => {
-            let data = res.data.data;
-            output = '';
-            if (res.data.message != 'nodata') {
-                if (data['id'] < 10) {
-                    data['id'] = '00' + data['id'];
-                } else if (data['id'] < 100) {
-                    data['id'] = '0' + data['id'];
-                }
+        getProfile = () => {
+            if (personal_id != '') {
+                axios.post('./api/informations.php', {
+                    action: 'myRegister',
+                    personal_id: personal_id
+                }).then((res) => {
+                    let data = res.data.data;
+                    output = '';
+                    if (res.data.message != 'nodata') {
+                        if (data['id'] < 10) {
+                            data['id'] = '00' + data['id'];
+                        } else if (data['id'] < 100) {
+                            data['id'] = '0' + data['id'];
+                        }
 
-                output += '<tr>';
-                output += '<td>' + data['id'] + '</td>';
-                output += '<td>' + data['created'] + '</td>';
-                output += '<td>' + data['firstname'] + '</td>';
-                output += '<td>' + data['middlename'] + '</td>';
-                output += '<td>' + data['familyname'] + '</td>';
-                output += '<td>' + '<button class = "btn btn-outline-info btn-sm" value="' +
-                    data['id'] + '" onclick = "callpdf(' + "'" + data[
-                        'id'
-                    ] + "'" + ')"><i class="fas fa-file-pdf"></i></button>';
-                output += '<button class = "btn btn-outline-info btn-sm ml-2" value="' +
-                    data['id'] + '" onclick = "viewPhoto()"><i class="fas fa-folder"></i></button>';
-                output += '<button class = "btn btn-outline-info btn-sm btn_edit ml-2" value="' +
-                    data['id'] +
-                    '" onclick = "editProfile()"><i class="fas fa-edit"></i></button>';
-                output += '</td>';
-                output += '</tr>';
+                        output += '<tr>';
+                        output += '<td>' + data['id'] + '</td>';
+                        output += '<td>' + data['created'] + '</td>';
+                        output += '<td>' + data['firstname'] + '</td>';
+                        output += '<td>' + data['middlename'] + '</td>';
+                        output += '<td>' + data['familyname'] + '</td>';
+                        output += '<td>' + '<button class = "btn btn-outline-info btn-sm" value="' +
+                            data['id'] + '" onclick = "callpdf(' + "'" + data[
+                                'id'
+                            ] + "'" + ')"><i class="fas fa-file-pdf"></i></button>';
+                        output += '<button class = "btn btn-outline-info btn-sm ml-2" value="' +
+                            data['id'] +
+                            '" onclick = "viewPhoto()"><i class="fas fa-folder"></i></button>';
+                        output +=
+                            '<button class = "btn btn-outline-info btn-sm btn_edit ml-2" value="' +
+                            data['id'] +
+                            '" onclick = "editProfile()"><i class="fas fa-edit"></i></button>';
+                        output += '</td>';
+                        output += '</tr>';
+                    }
+
+                    $('.fetch_data').html(output);
+                    var table = $('#dataTable').DataTable({
+                        lengthChange: false,
+                        searching: false
+                    });
+                    table.buttons().container()
+                        .appendTo('#dataTable_wrapper .col-md-6:eq(0)');
+                })
             }
 
-            $('.fetch_data').html(output);
-            var table = $('#dataTable').DataTable({
-                lengthChange: false,
-                searching: false
-            });
-            table.buttons().container()
-                .appendTo('#dataTable_wrapper .col-md-6:eq(0)');
-        })
+        }
+
     })
     </script>
 </body>

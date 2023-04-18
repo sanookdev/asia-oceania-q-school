@@ -11,6 +11,26 @@ class DB_con{
           }
     }
     
+
+    public function checkAdmin(){
+        $sql = "SELECT * FROM users WHERE username = 'ADMIN' LIMIT 1";
+        $query = $this->dbcon->query($sql);
+        $return = array();
+        if (!$query) {
+            $return['message'] = "Error description: " . $this->dbcon->error;
+            $return['status'] = false;
+        }else{
+            $return['status'] = true;
+            if($query->num_rows > 0){
+                $return['message'] = "success";
+                $return['status'] = true;
+                $return['data'] = $query->fetch_assoc();
+            }else{
+                $return['message'] = 'nodata';
+            }
+        }
+        return $return;
+    }
     // completed
     public function listRegister(){
         $sql = "SELECT * FROM info_personal ORDER BY id ASC";

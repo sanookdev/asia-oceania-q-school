@@ -14,17 +14,20 @@ if($_POST['action'] == 'checkLogin'){
     $username  = strtoupper(trim($_POST['data']['username']));
     $password = md5($_POST['data']['password']);
     $checkData = $service->checkUserLogin($username);
-    $idcard = md5($checkData['idcard']);
-    $passportNo = md5($checkData['passportNo']);
+
+
+    $idcard = (isset($checkData['idcard'])) ? md5($checkData['idcard']) : '';
+    $passportNo = (isset($checkData['passportNo'])) ? md5($checkData['passportNo']) : '';
+
 
     if($password == $idcard || $password == $passportNo){
-        // session_start();
-        // $_SESSION['user'] = $username;
-        // $_SESSION['personal_id'] = $checkData['id'];
-        // $_SESSION['firstname'] = $checkData['prefix'].$checkData['firstname'];
-        $result['user'] = $username;
-        $result['personal_id'] = $checkData['id'];
-        $result['firstname'] = $checkData['prefix'].$checkData['firstname'];
+        session_start();
+        $_SESSION['user'] = $username;
+        $_SESSION['personal_id'] = $checkData['id'];
+        $_SESSION['firstname'] = $checkData['prefix'].$checkData['firstname'];
+        // $result['user'] = $username;
+        // $result['personal_id'] = $checkData['id'];
+        // $result['firstname'] = $checkData['prefix'].$checkData['firstname'];
         $result['message'] = "Login Successful";
         $result['status'] = true;
     }else{

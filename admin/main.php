@@ -1,12 +1,20 @@
 <?php
-if (strtoupper($_POST['username']) == "ADMIN" && $_POST['password'] == "passwordQschool2022") {
-    session_start();
-    $_SESSION['user'] = "ADMIN";
-}else{
+session_start();
+
+if (!isset($_SESSION['user'])) {
     echo "<script>
     alert('username or password is invalid. you dont have permission.');
-    window.location.href='./logout.php';
-    </script>";
+    window.location.href = './logout.php';
+    </script>"; 
+    exit();
+}else{
+    if($_SESSION['user']!= "ADMIN"){
+        echo "<script>
+        alert('username or password is invalid. you dont have permission.');
+        window.location.href = './logout.php';
+        </script>"; 
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -72,6 +80,7 @@ if (strtoupper($_POST['username']) == "ADMIN" && $_POST['password'] == "password
                                 <tr>
                                     <th width="9%">No.</th>
                                     <th width="10%">Apply Date</th>
+                                    <th>Email</th>
                                     <th>First Name</th>
                                     <th>Middle Name</th>
                                     <th>Family Name</th>
@@ -147,12 +156,9 @@ if (strtoupper($_POST['username']) == "ADMIN" && $_POST['password'] == "password
 
     <script>
     $(document).ready(() => {
-        var user = <?= json_encode($_SESSION['user']);?>;
-        console.log(user);
 
-        if (user == "ADMIN") {
-            alertify.success('login success');
-        }
+        const USERNAME = <?= json_encode($_SESSION['user']);?>
+
         callpdf = (personal_id) => {
             if (personal_id != '') {
                 window.open('./api/previewPdf.php?personal_id=' + personal_id);
@@ -219,6 +225,7 @@ if (strtoupper($_POST['username']) == "ADMIN" && $_POST['password'] == "password
                     output += '<tr>';
                     output += '<td>' + parseInt(i + 1) + '</td>';
                     output += '<td>' + data[i]['created'] + '</td>';
+                    output += '<td>' + data[i]['email'] + '</td>';
                     output += '<td>' + data[i]['firstname'] + '</td>';
                     output += '<td>' + data[i]['middlename'] + '</td>';
                     output += '<td>' + data[i]['familyname'] + '</td>';

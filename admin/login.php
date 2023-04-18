@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Sign In</h3>
-                    <p style="color:white">Asia Oceania Q School 2022</p>
+                    <p style="color:white">Asia Oceania Q School 2023 (Administrator)</p>
                     <div class="d-flex justify-content-end social_icon">
                         <span onclick="window.open('https://www.facebook.com/thailandsnooker/','_blank')"><i
                                 class="fab fa-facebook-square"></i></span>
@@ -38,7 +38,7 @@
 
                 </div>
                 <div class="card-body">
-                    <form action="main.php" method="post">
+                    <form id="loginForm" action="main.php" method="post">
                         <div class="form-group error-message">
                         </div>
                         <div class="input-group form-group">
@@ -96,32 +96,32 @@
     <script>
     var countDownDate = new Date("May 16, 2022 12:00:00").getTime();
 
-    // Update the count down every 1 second
-    var x = setInterval(function() {
+    // // Update the count down every 1 second
+    // var x = setInterval(function() {
 
-        // Get today's date and time
-        var now = new Date().getTime();
+    //     // Get today's date and time
+    //     var now = new Date().getTime();
 
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
+    //     // Find the distance between now and the count down date
+    //     var distance = countDownDate - now;
 
-        // Time calculations for days, hours, minutes and seconds
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    //     // Time calculations for days, hours, minutes and seconds
+    //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Output the result in an element with id="demo"
-        document.getElementById("demo").innerHTML = 'Countdown for Entry close : ' + hours +
-            "h " +
-            minutes + "m " + seconds + "s ";
+    //     // Output the result in an element with id="demo"
+    //     document.getElementById("demo").innerHTML = 'Countdown for Entry close : ' + hours +
+    //         "h " +
+    //         minutes + "m " + seconds + "s ";
 
-        // If the count down is over, write some text 
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("demo").innerHTML = "Entry is closed";
-            document.getElementById('entryform').href = '#';
-        }
-    }, 1000);
+    //     // If the count down is over, write some text 
+    //     if (distance < 0) {
+    //         clearInterval(x);
+    //         document.getElementById("demo").innerHTML = "Entry is closed";
+    //         document.getElementById('entryform').href = '#';
+    //     }
+    // }, 1000);
     $(document).ready(function() {
         console.log('ready jquery function ')
         $('#loginForm').on('submit', (e) => {
@@ -141,8 +141,7 @@
                         outputhtml = '<div class = "alert alert-success">' + res.data.message +
                             '</div>';
                         $('.error-message').html(outputhtml);
-                        // window.location.href = "./main.php?user=" + res.data.session.user;
-                        nextPage(res.data.session.user);
+                        window.location.href = "./main.php";
                     } else {
                         outputhtml = '<div class = "alert alert-danger">' + res.data.message +
                             '</div>';

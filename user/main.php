@@ -1,6 +1,8 @@
 <?
 session_start();
-
+if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
+    header('Location: ./logout.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +38,8 @@ session_start();
 </head>
 
 <body class="layout-navbar-fixed ">
+
+
     <div id="overlay"></div>
     <div class="wrapper">
         <!-- Navbar -->
@@ -66,10 +70,15 @@ session_start();
                                     <th>Middle Name</th>
                                     <th>Family Name</th>
                                     <th width="10%"></th>
+                                    <th>Payment Status</th>
                                 </tr>
                             </thead>
                             <tbody class="fetch_data"></tbody>
                         </table>
+                        <form name="checkoutForm" method="POST" action="api/checkout.php">
+                            <p><button class="btn btn-outline-info btn-sm float-right" type="submit"
+                                    id="checkout-button-1"></button></p>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -135,30 +144,31 @@ session_start();
     <!-- Alertify -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
+    <script type="text/javascript" src="https://cdn.omise.co/omise.js"></script>
+
+
     <script>
     $(document).ready(() => {
-        const username = <?= json_encode($_POST['username']);?>;
-        const password = <?= json_encode($_POST['password']);?>;
-        console.log(username);
-        console.log(password);
+        const username = <?= json_encode($_SESSION['user']);?>;
+        const personal_id = <?= json_encode($_SESSION['personal_id']);?>;
 
-        var personal_id = '';
-        var data = {};
-        if (username != null && password != null) {
-            data['username'] = username;
-            data['password'] = password;
-            axios.post('./api/informations.php', {
-                action: 'checkLogin',
-                data: data
-            }).then((res) => {
-                console.log(res);
-                personal_id = res.data.personal_id;
-                getProfile();
-            })
-        } else {
-            alert('you dont have permission.');
-            window.location.href = "./logout.php";
+        setOmise = () => {
+            OmiseCard.configure({
+                publicKey: 'pkey_test_5v9mkntvtg6u58w5jut',
+                image: 'http://localhost/asia-oceania-q-school/pictures/logo/BSAT-Logo.jpg',
+                frameLabel: 'BSAT THAILAND',
+            });
+
+            // Configuring your own custom button
+            OmiseCard.configureButton('#checkout-button-1', {
+                buttonLabel: 'PAY Now 4,500 Baht',
+                submitLabel: 'PAY NOW',
+                amount: 450000
+            });
+            OmiseCard.attach();
         }
+
+
 
 
         callpdf = (personal_id) => {
@@ -181,7 +191,6 @@ session_start();
                         let photo = res.data[i].split('/');
                         let namefile = photo[photo.length - 1];
                         let locationFile = '../uploads/profiles/' + personal_id + '/' + namefile
-                        console.log(photo);
                         output += '<div><a href="' + locationFile + '" target ="_blank">' +
                             namefile +
                             '</a></div>'
@@ -196,59 +205,77 @@ session_start();
             })
         }
         editProfile = () => {
-            window.open("./editForm.php?user=" + username + "&personal_id=" + personal_id);
+            window.location.href = "./editForm.php";
         }
 
-        getProfile = () => {
-            if (personal_id != '') {
-                axios.post('./api/informations.php', {
-                    action: 'myRegister',
-                    personal_id: personal_id
-                }).then((res) => {
-                    let data = res.data.data;
-                    output = '';
-                    if (res.data.message != 'nodata') {
-                        if (data['id'] < 10) {
-                            data['id'] = '00' + data['id'];
-                        } else if (data['id'] < 100) {
-                            data['id'] = '0' + data['id'];
-                        }
+        axios.post('./api/informations.php', {
+            action: 'myRegister',
+            personal_id: personal_id
+        }).then((res) => {
+            let data = res.data.data;
+            output = '';
+            if (res.data.message != 'nodata') {
+                if (data['id'] < 10) {
+                    data['id'] = '00' + data['id'];
+                } else if (data['id'] < 100) {
+                    data['id'] = '0' + data['id'];
+                }
 
-                        output += '<tr>';
-                        output += '<td>' + data['id'] + '</td>';
-                        output += '<td>' + data['created'] + '</td>';
-                        output += '<td>' + data['firstname'] + '</td>';
-                        output += '<td>' + data['middlename'] + '</td>';
-                        output += '<td>' + data['familyname'] + '</td>';
-                        output += '<td>' + '<button class = "btn btn-outline-info btn-sm" value="' +
-                            data['id'] + '" onclick = "callpdf(' + "'" + data[
-                                'id'
-                            ] + "'" + ')"><i class="fas fa-file-pdf"></i></button>';
-                        output += '<button class = "btn btn-outline-info btn-sm ml-2" value="' +
-                            data['id'] +
-                            '" onclick = "viewPhoto()"><i class="fas fa-folder"></i></button>';
-                        output +=
-                            '<button class = "btn btn-outline-info btn-sm btn_edit ml-2" value="' +
-                            data['id'] +
-                            '" onclick = "editProfile()"><i class="fas fa-edit"></i></button>';
-                        output += '</td>';
-                        output += '</tr>';
-                    }
+                output += '<tr>';
+                output += '<td>' + data['id'] + '</td>';
+                output += '<td>' + data['created'] + '</td>';
+                output += '<td>' + data['firstname'] + '</td>';
+                output += '<td>' + data['middlename'] + '</td>';
+                output += '<td>' + data['familyname'] + '</td>';
 
-                    $('.fetch_data').html(output);
-                    var table = $('#dataTable').DataTable({
-                        lengthChange: false,
-                        searching: false
-                    });
-                    table.buttons().container()
-                        .appendTo('#dataTable_wrapper .col-md-6:eq(0)');
-                })
+                let buttonPayment =
+                    '<form name="checkoutForm" method="POST" action="checkout.php"><p><button class="btn btn-outline-info btn-sm float-right" type="submit" id="checkout-button-1"></button></p> </form>';
+
+                let classPaymentStatus = (data['payment_status'] == 1) ? 'text text-success' :
+                    'text text-danger';
+                let messagePayment = (data['payment_status'] == 1) ? 'paid' :
+                    'waiting for payment';
+
+                output += '<td>' + '<button class = "btn btn-outline-info btn-sm" value="' +
+                    data['id'] + '" onclick = "callpdf(' + "'" + data[
+                        'id'
+                    ] + "'" + ')"><i class="fas fa-file-pdf"></i></button>';
+                output += '<button class = "btn btn-outline-info btn-sm ml-2" value="' +
+                    data['id'] + '" onclick = "viewPhoto()"><i class="fas fa-folder"></i></button>';
+                output += '<button class = "btn btn-outline-info btn-sm btn_edit ml-2" value="' +
+                    data['id'] +
+                    '" onclick = "editProfile()"><i class="fas fa-edit"></i></button>';
+                output += '</td>';
+                output += '<td class = "' + classPaymentStatus + '">' + messagePayment;
+                output += '</td>';
+                output += '</tr>';
             }
 
-        }
-
+            $('.fetch_data').html(output);
+            setOmise();
+            // var table = $('#dataTable').DataTable({
+            //     lengthChange: false,
+            //     searching: false
+            // });
+            // table.buttons().container()
+            //     .appendTo('#dataTable_wrapper .col-md-6:eq(0)');
+        })
     })
     </script>
+
+    <?
+       if(isset($_SESSION['flash_message'])) {
+            $message = $_SESSION['flash_message'];
+            $status = $_SESSION['flash_status'];
+            unset($_SESSION['flash_message']);
+            unset($_SESSION['flash_status']);
+            if($status){
+                echo "<script>alertify.success(".json_encode($message).")</script>";
+            }else{
+                echo "<script>alertify.warning(".json_encode($message).")</script>";
+            }
+        }
+    ?>
 </body>
 
 </html>
@@ -276,7 +303,8 @@ tr td .btn {
 
 
 .table td,
-.table th {
+.table th,
+.table tr td {
     vertical-align: middle;
 }
 

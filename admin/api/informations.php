@@ -11,13 +11,18 @@ $result = array();
 
 if($_POST['action'] == 'checkLogin'){
     $data = $_POST['data'];
-    $result = $data;
-    if (strtoupper($data['username']) == "ADMIN" && $data['password'] == "passwordQschool2022") {
+    $username = strtoupper($data['username']);
+    $password = $data['password'];
+
+    $res = $service->checkAdmin();
+    if($username == "ADMIN" && $password == $res['data']['password']){
         session_start();
-        $_SESSION['user'] = "ADMIN";
+        $_SESSION = $res['data'];
+        $_SESSION['user'] = $_SESSION['username'];
+        unset($_SESSION['password']);
+        unset($_SESSION['username']);
         $result['message'] = "Login Successful";
         $result['status'] = true;
-        $result['session'] = $_SESSION;
     }else{
         $result['message'] = "Username or Password is invalid";
         $result['status'] = false;

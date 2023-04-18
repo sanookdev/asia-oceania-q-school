@@ -346,7 +346,7 @@
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="bankDepositSlip" name="file[]"
-                                        onchange="fileChangeName($(this))" required>
+                                        onchange="fileChangeName($(this))">
                                     <label class="custom-file-label bankDepositSlipNamefile">Choose file</label>
                                 </div>
                             </div>
@@ -394,7 +394,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <label for="vacineCert">Vaccination Certificate:</label>
                             <div class="input-group mb-3">
                                 <div class="custom-file">
@@ -403,7 +403,7 @@
                                     <label class="custom-file-label vacineCertNamefile">Choose file</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <button type="submit" class="btn btn-outline-success float-right btn_submit">Submit</button>
                 </form>
@@ -429,34 +429,34 @@
     <script>
     // var file = [];
     // Set the date we're counting down to
-    var countDownDate = new Date("May 16, 2022 12:00:00").getTime();
+    var countDownDate = new Date("May 16, 2023 12:00:00").getTime();
 
     // Update the count down every 1 second
-    var x = setInterval(function() {
+    // var x = setInterval(function() {
 
-        // Get today's date and time
-        var now = new Date().getTime();
+    //     // Get today's date and time
+    //     var now = new Date().getTime();
 
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
+    //     // Find the distance between now and the count down date
+    //     var distance = countDownDate - now;
 
-        // Time calculations for days, hours, minutes and seconds
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    //     // Time calculations for days, hours, minutes and seconds
+    //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Output the result in an element with id="demo"
-        document.getElementById("demo").innerHTML = 'Countdown for Entry close : ' + hours +
-            "h " +
-            minutes + "m " + seconds + "s ";
+    //     // Output the result in an element with id="demo"
+    //     document.getElementById("demo").innerHTML = 'Countdown for Entry close : ' + hours +
+    //         "h " +
+    //         minutes + "m " + seconds + "s ";
 
-        // If the count down is over, write some text 
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("demo").innerHTML = "Entry is closed";
-            document.getElementById('form_register').innerHTML = "";
-        }
-    }, 1000);
+    //     // If the count down is over, write some text 
+    //     if (distance < 0) {
+    //         clearInterval(x);
+    //         document.getElementById("demo").innerHTML = "Entry is closed";
+    //         document.getElementById('form_register').innerHTML = "";
+    //     }
+    // }, 1000);
 
     $(document).ready(() => {
         $('#form_register').on('submit', ((e) => {
@@ -570,10 +570,25 @@
     function getFile(idFile) {
         return _(idFile).files[0];
     }
-    var listFile = ['vacineCert', 'flightTicket', 'idcardPhoto', 'facePhoto', 'bankDepositSlip'];
+    // var listFile = ['vacineCert', 'flightTicket', 'idcardPhoto', 'facePhoto', 'bankDepositSlip'];
+    var listFile = ['flightTicket', 'idcardPhoto', 'facePhoto', 'bankDepositSlip'];
 
-    async function uploadFile(personal_id) {
+    function uploadFile(personal_id) {
         let reName = '';
+        let checkEmptyFile = 0;
+        for (i = 0; i < listFile.length; i++) {
+            let file = getFile[listFile[i]];
+            if (typeof file !== 'undefined') {
+                $checkEmptyFile++;
+            }
+        }
+
+        if (checkEmptyFile == 0) {
+            alertify.alert("Completed", function() {
+                window.location.href = './user';
+            });
+        }
+
         for (i = 0; i < listFile.length; i++) {
             if (listFile[i] == 'vacineCert') {
                 reName = 'vacinecertificate';
@@ -593,13 +608,14 @@
                 formdata.append('personal_id', personal_id);
                 formdata.append('reName', reName);
                 let url = "./api/file_upload_parser.php";
-                await $.ajax({
+                $.ajax({
                     type: 'post',
                     url: url,
                     processData: false,
                     contentType: false,
                     data: formdata,
                     success: function(response) {
+                        console.log(response)
                         if (response == '1') {
                             alertify
                                 .alert("Completed", function() {

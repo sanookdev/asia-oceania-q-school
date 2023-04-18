@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <span class="error-message" style="line-height:1rem!important;">
                     </span>
-                    <form action="./main.php" method="post">
+                    <form id="loginForm" method="post">
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -93,32 +93,32 @@
     <script>
     var countDownDate = new Date("May 16, 2022 12:00:00").getTime();
 
-    // Update the count down every 1 second
-    var x = setInterval(function() {
+    // // Update the count down every 1 second
+    // var x = setInterval(function() {
 
-        // Get today's date and time
-        var now = new Date().getTime();
+    //     // Get today's date and time
+    //     var now = new Date().getTime();
 
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
+    //     // Find the distance between now and the count down date
+    //     var distance = countDownDate - now;
 
-        // Time calculations for days, hours, minutes and seconds
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    //     // Time calculations for days, hours, minutes and seconds
+    //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Output the result in an element with id="demo"
-        document.getElementById("demo").innerHTML = 'Countdown for Entry close : ' + hours +
-            "h " +
-            minutes + "m " + seconds + "s ";
+    //     // Output the result in an element with id="demo"
+    //     document.getElementById("demo").innerHTML = 'Countdown for Entry close : ' + hours +
+    //         "h " +
+    //         minutes + "m " + seconds + "s ";
 
-        // If the count down is over, write some text 
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("demo").innerHTML = "Entry is closed";
-            document.getElementById('entryform').href = '#';
-        }
-    }, 1000);
+    //     // If the count down is over, write some text 
+    //     if (distance < 0) {
+    //         clearInterval(x);
+    //         document.getElementById("demo").innerHTML = "Entry is closed";
+    //         document.getElementById('entryform').href = '#';
+    //     }
+    // }, 1000);
     $(document).ready(function() {
         console.log('ready jquery function ')
         $('#loginForm').on('submit', (e) => {
