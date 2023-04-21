@@ -51,6 +51,13 @@ if (!isset($_SESSION['user'])) {
     <!-- Alertify -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+
+    <style>
+    td .btn-nowarp {
+        width: 100% !important;
+        margin-top: 5px !important;
+    }
+    </style>
 </head>
 
 <body class="layout-navbar-fixed ">
@@ -78,8 +85,9 @@ if (!isset($_SESSION['user'])) {
                             cellspacing="0">
                             <thead class="table-dark">
                                 <tr>
-                                    <th width="9%">No.</th>
+                                    <th width="5%">No.</th>
                                     <th width="10%">Apply Date</th>
+                                    <th>Payment status</th>
                                     <th>Email</th>
                                     <th>First Name</th>
                                     <th>Middle Name</th>
@@ -215,6 +223,37 @@ if (!isset($_SESSION['user'])) {
                 });
 
         }
+
+        confirm_pay = (personal_id, payment_status) => {
+            let newStatus = 0;
+            if (payment_status == 1) {
+                newStatus = 0;
+            } else {
+                newStatus = 1;
+            }
+            console.log(personal_id, newStatus)
+
+            alertify.confirm("Are you sure ?",
+                function() {
+                    axios.post('./api/informations.php', {
+                        action: 'confirm_pay',
+                        personal_id: personal_id,
+                        payment_status: newStatus
+                    }).then((res) => {
+                        if (res.status) {
+                            window.location.reload();
+                        } else {
+                            alertify.error(res.message);
+                        }
+                    })
+                },
+                function() {
+                    alertify.error('Cancel');
+                });
+
+        }
+
+
         axios.post('./api/informations.php', {
             action: 'listRegister'
         }).then((res) => {
@@ -225,6 +264,11 @@ if (!isset($_SESSION['user'])) {
                     output += '<tr>';
                     output += '<td>' + parseInt(i + 1) + '</td>';
                     output += '<td>' + data[i]['created'] + '</td>';
+                    if (data[i]['payment_status'] == '1') {
+                        output += '<td class = "text-success">paid</td>';
+                    } else {
+                        output += '<td class = "text-warning">waiting for pay</td>';
+                    }
                     output += '<td>' + data[i]['email'] + '</td>';
                     output += '<td>' + data[i]['firstname'] + '</td>';
                     output += '<td>' + data[i]['middlename'] + '</td>';
@@ -241,6 +285,10 @@ if (!isset($_SESSION['user'])) {
                         data[i]['id'] + '" onclick = "deleteData(' + "'" + data[i][
                             'id'
                         ] + "'" + ')"><i class="fas fa-trash"></i></button>';
+                    output +=
+                        '<button class = "btn btn-success btn-sm btn-nowarp" onclick = "confirm_pay(' +
+                        "'" + data[i]['id'] + "','" + data[i]['payment_status'] + "'" +
+                        ')">Confirm Pay</button>';
                     output += '</td>';
                     output += '</tr>';
                 }

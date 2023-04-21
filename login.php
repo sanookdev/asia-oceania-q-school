@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/index.css">
-    <title>Asia Oceania Q School 2022</title>
+    <title>Asia Oceania Q School 2023</title>
     <style>
     .btn-success {
         background-color: #2bc48a !important;
@@ -45,8 +45,8 @@
                     <img src="./pictures/logo/WST-Logo-Large.png" class="img-logo" alt="">
                     <img src="./pictures/logo/SAT-English.jpg" class="img-logo" alt="">
 
-                    <h4 style="color:white" style="margin-top:100px !important">Asia & Oceania Q School 2022</h4>
-                    1 - 15 June 2022 Bangkok, Thailand <br>
+                    <h4 style="color:white" style="margin-top:100px !important">Asia & Oceania Q School 2023</h4>
+                    1 - 15 June 2023 Bangkok, Thailand <br>
                     <a class="btn btn-primary btn-block btn-sm mt-md-2" data-toggle="modal" data-target="#hotelDetails">
                         <i class="fa fa-info-circle"></i>
                         Accommodation Details

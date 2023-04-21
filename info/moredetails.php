@@ -40,9 +40,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h5>Entry fee:</h5>
-                Entry fee for two Q school events is £400.- or Thai baht 17,600 or US$ 538<br>
+                Entry fee for two Q school events is £400.- or the equivalent of 17,000 Thai baht after bank’s fee.<br>
                 Tour Cards Validity: 4 spots of WST main tour - 2 spots for each event.
-                Duration on the WST Tour: 2022/23 and 2023/24 seasons <br><br>
+                Duration on the WST Tour: 2023/24 and 2024/25 seasons<br><br>
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-4">Payable to:</div>
@@ -97,22 +97,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h5>Closing dates:</h5>
-                The original closing dates on Friday May 6, 2022 has been extended to <br><b>Monday May 16, 2022 at
-                    12.00
-                    noon Bangkok Time.</b><br><br>
-                <p>Please make sure to upload your passport photocopy, your bank payment slip for the entry fee (English
-                    language), your vaccination certificate and your profile photo (white background) of no less than
-                    100 kb
-                    on the entry form respectively.</p>
-
-
-                <h5>Billiard Sports Association of Thailand <br> Email Address: bsat@me.com</h5>
+                Monday 15th May 2023 to ensure to have enough time for traveling procedures. <br><br>
+                <b>Players must send their application form together with the following to:</b><br>
+                <h5>BSAT Email Address: bsat@me.com</h5>
                 <p class="ml-5 mb-0">1. Photocopy of your passport (at least 6 months validation period before their
-                    return
-                    flight)</p>
-                <p class="ml-5 mb-0">2. Thailand Pass is still required, you may register for Thailand Pass
-                    directly.<br>
-                    Please see details for Thailand Pass registration on the Entry Pack.</p>
+                    return flight).</p>
+                <p class="ml-5 mb-0">2. A profile colour photo in playing uniform with white background of at least 200
+                    KB resolution in .jpg format only.</p>
+                <p class="ml-5 mb-0">3. A copy of your bank transfer slip for the entry fee (and T-shirts) that has been
+                    paid in .jpg format only. </p>
+                <p class="ml-5 mb-0">4. A confirmation letter of hotel reservation for 1 night.</p>
+                <p class="ml-5 mb-0">5. Your roundtrip air tickets or flight confirmation to and from Bangkok.</p>
             </div>
         </div>
     </div>
@@ -149,13 +144,16 @@ system which you have to apply for yourself. This process would take about three
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h5>The Henri Dunant Hall, Royal Bangkok Sports Club (RBSC):</h5>
+                <h5>The Grand Ballroom, Royal Bangkok Sports Club (RBSC):</h5>
                 <b>Website</b>:
                 <a href="https://www.rbsc.org/" target="_blank">
                     https://www.rbsc.org/
                 </a><br>
                 <b>Venue address:</b><br>
-                1 Henry Dunant Road, Pathumwan, Bangkok 10330 Tel: +662 028-7272
+                1 Henry Dunant Road, Pathumwan, Bangkok 10330 Tel: +662 028-7272<br>
+                I hereby confirm to take part in this year Asia & Oceania Q School and will be fully responsible for all
+                the costs effective on my own expenses.
+
             </div>
         </div>
     </div>
@@ -174,13 +172,13 @@ system which you have to apply for yourself. This process would take about three
                 <h6>You may make direct reservation with the hotel to this contact:</h6>
                 <h5>Accommodation:</h5>
 
-                &nbsp;&nbsp;Hotel Recommendation: Novotel Bangkok on Siam Square <br>
-                &nbsp;&nbsp;(5 minutes car ride to the venue, 15 minutes walk).
+                &nbsp;&nbsp;<b>Montien Hotel Surawong, Bangkok (5 stars)</b> <br>
+                &nbsp;&nbsp;(5 minutes’ ride to the venue by car, 20 minutes’ walk)
                 <br><br>
 
                 <h5>Hotel Address:</h5>
 
-                &nbsp;&nbsp;392/44 Siam Square Soi 6, Bangkok 10330 <br><br>
+                &nbsp;&nbsp;54 Surawong Road, Silom, Bangrak, Bangkok 10500 Thailand<br><br>
 
                 <p>
                     &nbsp;&nbsp;Contact Person:<br><br>
@@ -192,11 +190,11 @@ system which you have to apply for yourself. This process would take about three
                 </p>
 
                 <h5>Roomrates:</h5>
-                &nbsp;&nbsp;(all rates are inclusive of breakfast)<br><br>
-                &nbsp;&nbsp;Single Superior: 1,400 Thai baht net<br>
-                &nbsp;&nbsp;Twin Superior: 1,700 Thai baht net<br>
+                &nbsp;&nbsp;Deluxe room for twin bed inclusive of breakfast<br><br>
+                &nbsp;&nbsp;Special contract room rate for Asia & Oceania Q School <br>
+                &nbsp;&nbsp;2,500 Thai baht/day for single and 2,900 Thai baht/day for double.<br>
                 &nbsp;&nbsp;Trilple Superior: 2,000 Thai baht net<br>
-                &nbsp;&nbsp;Extra bed: 900 Thai baht net
+                &nbsp;&nbsp;Additional 1,500 Thai/baht for another person with extra bed
             </div>
         </div>
     </div>

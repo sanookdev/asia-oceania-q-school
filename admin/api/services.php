@@ -66,6 +66,19 @@ class DB_con{
         return $return;
     }
 
+    public function confirm_pay($personal_id,$newStatus){
+        $sql = "UPDATE info_personal SET payment_status = '$newStatus' WHERE id = '$personal_id'";
+        $query = $this->dbcon->query($sql);
+        if (!$query) {
+            $return['message'] = "Error description: " . $this->dbcon->error;
+            $return['status'] = false;
+        }else{
+            $return['message'] = 'success';
+            $return['status'] = true;
+        }
+        return $return;
+    }
+
     // completed
     public function listAccountAll(){
         $sql = "SELECT * FROM users";

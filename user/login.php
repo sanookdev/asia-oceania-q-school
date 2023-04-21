@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Sign In</h3>
-                    <p style="color:white">Asia Oceania Q School 2022 </p>
+                    <p style="color:white">Asia Oceania Q School 2023 </p>
                     <!-- <p style="color:red">(login system maintenance)</p> -->
                     <div class="d-flex justify-content-end social_icon">
                         <span onclick="window.open('https://www.facebook.com/thailandsnooker/','_blank')"><i

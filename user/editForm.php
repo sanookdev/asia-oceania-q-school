@@ -1,7 +1,9 @@
 <?
 session_start();
-if(!isset($_GET['user'])){
+if(!isset($_SESSION['user'])){
     header('Location: ./logout.php');
+}else{
+    echo "<script>console.log('".json_encode($_SESSION)."')</script>";
 }
 ?>
 
@@ -39,14 +41,13 @@ if(!isset($_GET['user'])){
         <div class="card mt-3">
             <div class="card-body">
                 <div class="card-title text-center p-md-5" style="padding-bottom:0px!important;">
-                    <img src="../pictures/logo/BSAT-Logo.jpg" class="img-logo mr-3" alt="">
-                    <img src="../pictures/logo/WST-Logo-Large.png" class="img-logo" alt="">
                     <img src="../pictures/logo/SAT-English.jpg" class="img-logo" style="margin-left: -10px" alt="">
-
+                    <img src="../pictures/logo/WST-Logo-Large.png" class="img-logo" alt="">
+                    <img src="../pictures/logo/BSAT-Logo.jpg" class="img-logo mr-3" alt="">
                     <h4 class="mt-3 head-title">
                         Entry Form<br>
-                        Asia & Oceania Q School 2022 <br>
-                        1 - 15 June 2022 <br>
+                        Asia & Oceania Q School 2023 <br>
+                        1 - 15 June 2023 <br>
                         Bangkok, Thailand
                     </h4>
                 </div>
@@ -253,10 +254,10 @@ if(!isset($_GET['user'])){
                     </div>
                     <hr>
                     <h5>Other Information:</h5>
-                    <a class="btn btn-primary mt-2" data-toggle="modal" data-target="#testGoProcedure">
+                    <!-- <a class="btn btn-primary mt-2" data-toggle="modal" data-target="#testGoProcedure">
                         <i class="fa fa-info-circle"></i>
                         Test & Go procedure
-                    </a>
+                    </a> -->
                     <a class="btn btn-primary mt-2" data-toggle="modal" data-target="#entryFee">
                         <i class="fa fa-info-circle"></i>
                         Entry fee
@@ -329,6 +330,9 @@ if(!isset($_GET['user'])){
 
                     <hr>
                     <h5>Require Documents:</h5>
+                    <h5 style="color:red" class="mt-4">Require Documents (must be submit before closing date to
+                        complete the
+                        entry)</h5>
                     <div class="form-row mt-4">
                         <div class="col-md-12">
                             <label for="bankDepositSlip">Bank Deposit Slip:<br>
@@ -342,9 +346,6 @@ if(!isset($_GET['user'])){
                             </div>
                         </div>
                     </div>
-                    <h5 style="color:red" class="mt-4">Other Require Documents (must be submit before closing date to
-                        complete the
-                        entry)</h5>
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="facePhoto">Profile Photo<br>
@@ -383,7 +384,7 @@ if(!isset($_GET['user'])){
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <label for="vacineCert">Vaccination Certificate:</label>
                             <div class="input-group mb-3">
                                 <div class="custom-file">
@@ -392,7 +393,7 @@ if(!isset($_GET['user'])){
                                     <label class="custom-file-label vacineCertNamefile">Choose file</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- <a href="./" class="btn btn-outline-success float-left">Back</a> -->
 
@@ -419,8 +420,8 @@ if(!isset($_GET['user'])){
 
     <script>
     // var file = [];
-    const personal_id = <?= json_encode($_GET['personal_id']);?>;
-    const username = <?= json_encode($_GET['user']);?>;
+    const personal_id = <?= json_encode($_SESSION['personal_id']);?>;
+    const username = <?= json_encode($_SESSION['user']);?>;
     $(document).ready(() => {
 
         axios.post('./api/informations.php', {
@@ -511,14 +512,16 @@ if(!isset($_GET['user'])){
     function getFile(idFile) {
         return _(idFile).files[0];
     }
-    var listFile = ['vacineCert', 'flightTicket', 'idcardPhoto', 'facePhoto', 'bankDepositSlip'];
+    // var listFile = ['vacineCert', 'flightTicket', 'idcardPhoto', 'facePhoto', 'bankDepositSlip'];
+    var listFile = ['flightTicket', 'idcardPhoto', 'facePhoto', 'bankDepositSlip'];
 
     function uploadFile() {
         let reName = '';
         for (i = 0; i < listFile.length; i++) {
-            if (listFile[i] == 'vacineCert') {
-                reName = 'vacinecertificate';
-            } else if (listFile[i] == 'flightTicket') {
+            // if (listFile[i] == 'vacineCert') {
+            //     reName = 'vacinecertificate';
+            // }
+            if (listFile[i] == 'flightTicket') {
                 reName = 'arrival_flight_ticket';
             } else if (listFile[i] == 'idcardPhoto') {
                 reName = 'idcard';

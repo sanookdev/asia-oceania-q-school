@@ -36,14 +36,12 @@
         <div class="card mt-3">
             <div class="card-body">
                 <div class="card-title text-center p-md-5" style="padding-bottom:0px!important;">
-                    <img src="./pictures/logo/BSAT-Logo.jpg" class="img-logo mr-3" alt="">
-                    <img src="./pictures/logo/WST-Logo-Large.png" class="img-logo" alt="">
                     <img src="./pictures/logo/SAT-English.jpg" class="img-logo" style="margin-left: -10px" alt="">
-
+                    <img src="./pictures/logo/WST-Logo-Large.png" class="img-logo" alt="">
+                    <img src="./pictures/logo/BSAT-Logo.jpg" class="img-logo mr-3" alt="">
                     <h4 class="mt-3 head-title">
-                        Entry Form<br>
-                        Asia & Oceania Q School 2022 <br>
-                        1 - 15 June 2022 <br>
+                        Application form Asia & Oceania Q School 2023 <br>
+                        1 - 15 June 2023 <br>
                         Bangkok, Thailand
                     </h4>
                     <div class="mt-3">
@@ -71,7 +69,7 @@
                     </div>
                     <div class="form-row mt-3">
                         <div class="col-md-4">
-                            <label for="firstname">First Name*</label>
+                            <label for="firstname">First Name<span style="color:red">*</span></label>
                             <input type="text" class="form-control" name="firstname" id="firstname" required>
                         </div>
                         <div class="col-md-4">
@@ -79,42 +77,42 @@
                             <input type="text" class="form-control" name="middlename" id="middlename">
                         </div>
                         <div class="col-md-4">
-                            <label for="familyname">Family Name*</label>
+                            <label for="familyname">Family Name<span style="color:red">*</span></label>
                             <input type="text" class="form-control" name="familyname" id="familyname" required>
                         </div>
                     </div>
                     <div class="form-row mt-3">
                         <div class="col-md-6">
-                            <label>Gender*</label>
+                            <label>Gender<span style="color:red">*</span></label>
                             <select name="gender" id="gender" class="form-control">
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="dateofbirth">Date Of Birth*</label>
+                            <label for="dateofbirth">Date Of Birth<span style="color:red">*</span></label>
                             <input type="date" class="form-control" name="dateofbirth" id="dateofbirth" required>
                         </div>
                     </div>
 
                     <div class="form-row mt-3">
                         <div class="col-md-6">
-                            <label for="age">Age*</label>
+                            <label for="age">Age<span style="color:red">*</span></label>
                             <input type="number" class="form-control" name="age" id="age" min="12" value="12" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="pob">Place Of Birth*</label>
+                            <label for="pob">Place Of Birth<span style="color:red">*</span></label>
                             <input type="text" class="form-control" name="pob" id="pob" required>
                         </div>
                     </div>
 
                     <div class="form-row mt-3">
                         <div class="col-md-6">
-                            <label for="country">Country*</label>
+                            <label for="country">Country<span style="color:red">*</span></label>
                             <input type="text" class="form-control" name="country" id="country" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="nationality">Nationality*</label>
+                            <label for="nationality">Nationality<span style="color:red">*</span></label>
                             <input type="text" class="form-control" name="nationality" id="nationality" required>
                         </div>
                     </div>
@@ -133,18 +131,18 @@
 
                     <div class="form-row mt-3">
                         <div class="col-md-6">
-                            <label for="issueddate">Issued Date*</label>
+                            <label for="issueddate">Issued Date<span style="color:red">*</span></label>
                             <input type="date" class="form-control" name="issueddate" id="issueddate" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="expirydate">Expiry Date*</label>
+                            <label for="expirydate">Expiry Date<span style="color:red">*</span></label>
                             <input type="date" class="form-control" name="expirydate" id="expirydate" required>
                         </div>
                     </div>
 
                     <div class="form-row mt-3">
                         <div class="col-md-4">
-                            <label for="formerProfessional">Former Professional*</label>
+                            <label for="formerProfessional">Former Professional<span style="color:red">*</span></label>
                             <select name="formerProfessional" id="formerProfessional" class="form-control" required>
                                 <option value="">Choose</option>
                                 <option value="Yes">Yes</option>
@@ -155,7 +153,7 @@
 
                     <div class="form-row mt-3">
                         <div class="col-md-4">
-                            <label for="yearsactive">Years Active*</label>
+                            <label for="yearsactive">Years Active<span style="color:red">*</span></label>
                             <input type="text" class="form-control" name="yearsactive" id="yearsactive" disabled>
                         </div>
                         <div class="col-md-4">
@@ -171,12 +169,13 @@
                     </div>
                     <div class="form-row mt-3">
                         <div class="col-md-6">
-                            <label for="bestPracticebreak">Best Practice Break*</label>
+                            <label for="bestPracticebreak">Best Practice Break<span style="color:red">*</span></label>
                             <input type="text" class="form-control" name="bestPracticebreak" id="bestPracticebreak"
                                 required>
                         </div>
                         <div class="col-md-6">
-                            <label for="bestTournamentbreak">Best Tournament Break*</label>
+                            <label for="bestTournamentbreak">Best Tournament Break<span
+                                    style="color:red">*</span></label>
                             <input type="text" class="form-control" name="bestTournamentbreak" id="bestTournamentbreak"
                                 required>
                         </div>
@@ -206,7 +205,7 @@
                     <div class="form-row mt-3">
                         <div class="col-md-4">
                             <label for="firstnameParty1">1.Party Name</label>
-                            <input placeholder="First Name*" type="text" class="form-control" name="firstnameParty1"
+                            <input placeholder="First Name" type="text" class="form-control" name="firstnameParty1"
                                 id="firstnameParty1">
                         </div>
                         <div class="col-md-4">
@@ -216,7 +215,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="familynameParty1" style="opacity : 0">1.</label>
-                            <input placeholder="Family Name*" type="text" class="form-control" name="familynameParty1"
+                            <input placeholder="Family Name" type="text" class="form-control" name="familynameParty1"
                                 id="familynameParty1">
                         </div>
                     </div>
@@ -262,10 +261,10 @@
                     </div>
                     <hr>
                     <h5>Other Information:</h5>
-                    <a class="btn btn-primary mt-2" data-toggle="modal" data-target="#testGoProcedure">
+                    <!-- <a class="btn btn-primary mt-2" data-toggle="modal" data-target="#testGoProcedure">
                         <i class="fa fa-info-circle"></i>
                         Test & Go procedure
-                    </a>
+                    </a> -->
                     <a class="btn btn-primary mt-2" data-toggle="modal" data-target="#entryFee">
                         <i class="fa fa-info-circle"></i>
                         Entry fee
@@ -278,7 +277,7 @@
                     <h5>Player’s Contact Information:</h5>
                     <div class="form-row mt-3">
                         <div class="col-md-8">
-                            <label for="homeAddress">Home Address*</label>
+                            <label for="homeAddress">Home Address<span style="color:red">*</span></label>
                             <textarea rows="4" class="form-control" name="homeAddress" id="homeAddress"
                                 required></textarea>
                         </div>
@@ -286,13 +285,14 @@
 
                     <div class="form-row mt-4">
                         <div class="col-md-6">
-                            <label for="email">Email Address*</label><span class="error">(Mandatory and Case
+                            <label for="email">Email Address<span style="color:red">*</span></label><span
+                                class="error">(Mandatory and Case
                                 Sensitive)</span>
                             <input type="text" class="form-control" name="email" id="email" required>
                             <span class="err-emailMessage"></span>
                         </div>
                         <div class="col-md-6">
-                            <label for="mobile">Mobile No.*</label>
+                            <label for="mobile">Mobile No.<span style="color:red">*</span></label>
                             <input type="text" class="form-control" name="mobile" id="mobile" required>
                         </div>
                     </div>
@@ -339,6 +339,9 @@
 
                     <hr>
                     <h5>Require Immediately:</h5>
+                    <h5 style="color:red" class="mt-4">Require Documents (must be submit before closing date to
+                        complete the
+                        entry)</h5>
                     <div class="form-row mt-4">
                         <div class="col-md-6">
                             <label for="bankDepositSlip">Bank Deposit Slip:<br>
@@ -352,10 +355,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <h5 style="color:red" class="mt-4">Other Require Documents (must be submit before closing date to
-                        complete the
-                        entry)</h5>
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="facePhoto">Profile Photo<br>

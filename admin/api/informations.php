@@ -57,6 +57,19 @@ else if($_POST['action'] == 'deleteData'){
         }
     }
 }
+else if($_POST['action'] == 'confirm_pay'){
+    $personal_id = $_POST['personal_id'];
+    $newStatus = $_POST['payment_status'];
+    $query = $service->confirm_pay($personal_id,$newStatus);
+    $result = $query;
+    if($query['status']){
+        $result['message'] = $query['message'];
+        $result['status'] = true;
+    }else{
+        $result['message'] = $query['message'];
+        $result['status'] = false;
+    }
+}
 
 else if ($_POST['action'] == 'register'){
     $data = $_POST['data'];
