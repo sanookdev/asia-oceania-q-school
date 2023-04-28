@@ -395,7 +395,7 @@ if(!isset($_SESSION['user'])){
                             </div>
                         </div> -->
                     </div>
-                    <!-- <a href="./" class="btn btn-outline-success float-left">Back</a> -->
+                    <a href="./" class="btn btn-outline-info float-left">Back</a>
 
                     <button type="submit" class="btn btn-outline-success float-right btn_submit">Update</button>
                 </form>

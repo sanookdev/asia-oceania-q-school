@@ -59,12 +59,24 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="forThai">Thai Nationality</label>
+                            <label for="forThai">Thai Nationality</label><small class="text-danger"> ( Please choose
+                                "Yes" or "No" )</small>
                             <select name="forThai" id="forThai" class="form-control" required>
                                 <option value="">Choose</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-row mt-3">
+                        <div class="col-md-6">
+                            <label for="passportNo">Passport No</label>
+                            <span class="error">(Mandatory)</span>
+                            <input type="text" class="form-control" name="passportNo" id="passportNo" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="idcard">Thai Citizenship I.D. No</label>
+                            <input type="text" class="form-control" name="idcard" id="idcard" max="13" disabled>
                         </div>
                     </div>
                     <div class="form-row mt-3">
@@ -114,18 +126,6 @@
                         <div class="col-md-6">
                             <label for="nationality">Nationality<span style="color:red">*</span></label>
                             <input type="text" class="form-control" name="nationality" id="nationality" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row mt-3">
-                        <div class="col-md-6">
-                            <label for="passportNo">Passport No</label>
-                            <span class="error">(Mandatory)</span>
-                            <input type="text" class="form-control" name="passportNo" id="passportNo" disabled>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="idcard">Thai Citizenship I.D. No</label>
-                            <input type="text" class="form-control" name="idcard" id="idcard" max="13" disabled>
                         </div>
                     </div>
 
@@ -256,15 +256,53 @@
                                 <option value="">Choose</option>
                                 <option value="Single">Single</option>
                                 <option value="Twin">Twin</option>
+                                <option value="Trilple">Trilple</option>
                             </select>
                         </div>
                     </div>
                     <hr>
-                    <h5>Other Information:</h5>
-                    <!-- <a class="btn btn-primary mt-2" data-toggle="modal" data-target="#testGoProcedure">
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#tshirtDetails">
                         <i class="fa fa-info-circle"></i>
-                        Test & Go procedure
-                    </a> -->
+                        Asia Oceania Q School T-shirt details:
+                    </a>
+                    <div class="form-row mt-3">
+                        <div class="col-md-4">
+                            <label for="tshirt">T-shirt order (Please select your preference)</label>
+                            <select name="tshirt" id="tshirt" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row mt-3">
+                        <div class="col-md-4">
+                            <label for="tshirtblack">Black colour</label>
+                            <input placeholder="How many" type="number" class="form-control" name="tshirtblack"
+                                id="tshirtblack" min="0" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tshirtblack_details">Black colour size details</label>
+                            <input type="text" class="form-control" name="tshirtblack_details" id="tshirtblack_details"
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-row mt-3">
+                        <div class="col-md-4">
+                            <label for="tshirtwhite">White colour</label>
+                            <input placeholder="How many" type="number" class="form-control" name="tshirtwhite"
+                                id="tshirtwhite" min="0" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tshirtwhite_details">White colour size details</label>
+                            <input type="text" class="form-control" name="tshirtwhite_details" id="tshirtwhite_details"
+                                disabled />
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h5>Other Information:</h5>
                     <a class="btn btn-primary mt-2" data-toggle="modal" data-target="#entryFee">
                         <i class="fa fa-info-circle"></i>
                         Entry fee
@@ -344,7 +382,8 @@
                         entry)</h5>
                     <div class="form-row mt-4">
                         <div class="col-md-6">
-                            <label for="bankDepositSlip">Bank Deposit Slip:<br>
+                            <label for="bankDepositSlip">Bank Deposit Slip:<br>(No bank deposit slip is needed to be
+                                uploaded in case the entry fee is paid by credit card.)
                             </label>
                             <div class="input-group">
                                 <div class="custom-file">
@@ -358,7 +397,7 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="facePhoto">Profile Photo<br>
-                                (Color Photo with white background no less than 100 kb)
+                                (Colour Photo with white background no less than 200 kb)
                             </label>
                             <div class="input-group">
                                 <div class="custom-file">
@@ -465,6 +504,7 @@
                 datas[field.name] = field.value;
             });
             delete datas['forThai'];
+            console.log(datas);
             if (datas['passportNo'] == '' && datas['idcard'] == '') {
                 alertify.error('Mandatory Passport No or Thai Citizenship I.D. ');
             } else {
@@ -490,6 +530,58 @@
                 $('#typeRoom').val('');
                 $('#typeRoom').prop('required', false);
                 $('#typeRoom').prop('disabled', true);
+            }
+        })
+
+        $('#tshirt').on('change', () => {
+            let val = $('#tshirt').find(":selected").val();
+            console.log(val);
+            if (val == '1') {
+                $('#tshirtblack').prop('disabled', false);
+                $('#tshirtblack').prop('required', true);
+                $('#tshirtblack').val(0);
+                $('#tshirtwhite').prop('disabled', false);
+                $('#tshirtwhite').prop('required', true);
+                $('#tshirtwhite').val(0);
+            } else {
+                $('#tshirtblack').val('');
+                $('#tshirtwhite').val('');
+                $('#tshirtblack').prop('required', false);
+                $('#tshirtblack').prop('disabled', true);
+                $('#tshirtwhite').prop('required', false);
+                $('#tshirtwhite').prop('disabled', true);
+            }
+        })
+
+        $('#tshirtblack').on('change', () => {
+            let val = $('#tshirtblack').val();
+            let exampleSizeDetails = "Example. S = 1 , XL = 2 , 3XL = 2";
+            console.log(val);
+            if (val > 0) {
+                $('#tshirtblack_details').prop('disabled', false);
+                $('#tshirtblack_details').prop('required', true);
+                $('#tshirtblack_details').prop('placeholder', exampleSizeDetails);
+            } else {
+                $('#tshirtblack').val(0);
+                $('#tshirtblack_details').prop('disabled', true);
+                $('#tshirtblack_details').prop('required', false);
+                $('#tshirtblack_details').prop('placeholder', false);
+            }
+        })
+
+        $('#tshirtwhite').on('change', () => {
+            let val = $('#tshirtwhite').val();
+            let exampleSizeDetails = "Example. S = 1 , XL = 2 , 3XL = 2";
+            console.log(val);
+            if (val > 0) {
+                $('#tshirtwhite_details').prop('disabled', false);
+                $('#tshirtwhite_details').prop('required', true);
+                $('#tshirtwhite_details').prop('placeholder', exampleSizeDetails);
+            } else {
+                $('#tshirtwhite').val(0);
+                $('#tshirtwhite_details').prop('disabled', true);
+                $('#tshirtwhite_details').prop('required', false);
+                $('#tshirtwhite_details').prop('placeholder', false);
             }
         })
 

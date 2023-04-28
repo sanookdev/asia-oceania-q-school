@@ -38,7 +38,8 @@
             <div class="card text-center">
                 <div class="card-header">
                     <div class="d-flex justify-content-end social_icon">
-                        <span onclick="window.open('https://www.facebook.com/thailandsnooker/','_blank')"><i
+                        <span
+                            onclick="window.open('https://www.facebook.com/BsatTH?mibextid=ZbWKwL%E2%80%8B','_blank')"><i
                                 class="fab fa-facebook-square"></i></span>
                         <span onclick="window.open('http://www.thailandsnooker.org/','_blank')">
                             <i class="fa fa-globe" aria-hidden="true"></i>
@@ -61,8 +62,8 @@
                 </div>
                 <div class="card-footer">
                     <a href="./entry-form" style="color:orange!important;" id="entryform">Entry Form</a>
-                    <span style="color:white;" class="mr-2 ml-2"> or</span>
-                    <a href="./user" style="color:orange!important;">Login</a>
+                    <span style="color:white;" class="mr-2 ml-2" id="or"> or</span>
+                    <a href="./user" style="color:orange!important;">Log In</a>
                 </div>
 
                 <div class="mt-3">
@@ -88,7 +89,15 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
     // Set the date we're counting down to
-    var countDownDate = new Date("May 16, 2023 12:00:00").getTime();
+    var countDownDate = new Date("Apr 24, 2023 12:00:00");
+    var now = new Date();
+    if (now >= countDownDate) {
+        $('#entryform').prop('hidden', false);
+        $('#or').prop('hidden', false);
+    } else {
+        $('#entryform').prop('hidden', true);
+        $('#or').prop('hidden', true);
+    }
 
     // Update the count down every 1 second
     // var x = setInterval(function() {

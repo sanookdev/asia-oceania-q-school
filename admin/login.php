@@ -29,7 +29,8 @@
                     <h3>Sign In</h3>
                     <p style="color:white">Asia Oceania Q School 2023 (Administrator) </p>
                     <div class="d-flex justify-content-end social_icon">
-                        <span onclick="window.open('https://www.facebook.com/thailandsnooker/','_blank')"><i
+                        <span
+                            onclick="window.open('https://www.facebook.com/BsatTH?mibextid=ZbWKwL%E2%80%8B','_blank')"><i
                                 class="fab fa-facebook-square"></i></span>
                         <span onclick="window.open('http://www.thailandsnooker.org/','_blank')">
                             <i class="fa fa-globe" aria-hidden="true"></i>
@@ -97,7 +98,13 @@
 
 
     <script>
-    var countDownDate = new Date("May 16, 2022 12:00:00").getTime();
+    var countDownDate = new Date("Apr 24, 2023 12:00:00");
+    var now = new Date();
+    if (now >= countDownDate) {
+        $('#entryform').prop('hidden', false);
+    } else {
+        $('#entryform').prop('hidden', true);
+    }
 
     // // Update the count down every 1 second
     // var x = setInterval(function() {

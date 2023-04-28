@@ -77,11 +77,17 @@
                     <div class="col-md-4">Amout:</div>
                     <div class="col-md">£400</div>
                 </div><br>
-                In the case of entrants contracted Covid-19 and are unable to travel within the time frame of the
-                events.<br> A legitimate lab results must be sent to <b> bsat@me.com </b>for the refund on the entry fee
-                with
-                your
-                bank details as shown above.<br> All relevant bank charges would be deducted accordingly.
+                <!-- In the case of entrants contracted Covid-19 and are unable to travel within the time frame of the events. -->
+                <span class="text-info">Credit card charge access will be available on the entry form
+                    soon.<br>
+                    For credit card payment, please submit your entry form first and log back in to get access to credit
+                    card payment when it becomes available.</span><br><br>
+
+                &nbsp;&nbsp;In the case of entrant contracted Covid-19 and is unable to travel within the time frame of
+                the events. <br>
+                &nbsp;&nbsp;A legitimate lab results must be sent to bsat@me.com for the refund on the entry fee. All
+                relevant bank<br>
+                &nbsp;&nbsp;charges would be deducted accordingly.<br>
             </div>
         </div>
     </div>
@@ -97,7 +103,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h5>Closing dates:</h5>
-                Monday 15th May 2023 to ensure to have enough time for traveling procedures. <br><br>
+                Monday 15th May 2023 (at 12.00 noon Bangkok Time) to ensure to have enough time for traveling
+                procedures. <br><br>
                 <b>Players must send their application form together with the following to:</b><br>
                 <h5>BSAT Email Address: bsat@me.com</h5>
                 <p class="ml-5 mb-0">1. Photocopy of your passport (at least 6 months validation period before their
@@ -107,7 +114,10 @@
                 <p class="ml-5 mb-0">3. A copy of your bank transfer slip for the entry fee (and T-shirts) that has been
                     paid in .jpg format only. </p>
                 <p class="ml-5 mb-0">4. A confirmation letter of hotel reservation for 1 night.</p>
-                <p class="ml-5 mb-0">5. Your roundtrip air tickets or flight confirmation to and from Bangkok.</p>
+                <p class="ml-5 mb-0">5. Your roundtrip air tickets or flight confirmation to and from Bangkok.</p><br>
+                <p class="ml-5 mb-0">
+                    The draw will be conducted online shortly after the closing dates. Please check for
+                    details on <a href="www.worldsnooker.com">www.worldsnooker.com</a> for match schedules.</p>
             </div>
         </div>
     </div>
@@ -160,6 +170,124 @@ system which you have to apply for yourself. This process would take about three
 </div>
 
 
+<!-- Modal Tshirt Details -->
+<div class="modal fade" id="tshirtDetails" tabindex="-1" role="dialog" aria-labelledby="tshirtDetailsTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-4">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5>Asia Oceania Q School T-shirt Order:</h5>
+                &nbsp;&nbsp;<b>Price:</b> £10 each <b>or</b> 425 Thai baht each <br>
+                <h5>How to measure:</h5>
+                &nbsp;&nbsp;<b>Chest:</b> Measure the front side from left to right and multiply by 2 <br>
+                &nbsp;&nbsp;<b>Length:</b> Measure the front side from top of shoulder to the bottom of the shirt <br>
+                &nbsp;&nbsp;(no need to multiply by 2)
+                <br><br>
+
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Chest/inches</th>
+                            <th>Length/inches</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <? $chestStart = 36 ; $lengthStart = 25;?>
+                        <tr>
+                            <td>S</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td>M</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td>L</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1;?>
+                        </tr>
+                        <? $xlStart = 2;?>
+                        <tr>
+                            <td>XL</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td><?= $xlStart;?>XL</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1; $xlStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td><?= $xlStart;?>XL</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1; $xlStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td><?= $xlStart;?>XL</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1; $xlStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td><?= $xlStart;?>XL</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1; $xlStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td><?= $xlStart;?>XL</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1; $xlStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td><?= $xlStart;?>XL</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1; $xlStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td><?= $xlStart;?>XL</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1; $xlStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td><?= $xlStart;?>XL</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1; $xlStart += 1;?>
+                        </tr>
+                        <tr>
+                            <td><?= $xlStart;?>XL</td>
+                            <td><?= $chestStart;?></td>
+                            <td><?= $lengthStart;?></td>
+                            <? $chestStart += 2; $lengthStart += 1; $xlStart += 1;?>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                &nbsp;&nbsp;Should you wish to purchase the Asia Oceania Q School T-shirt, please indicate the preferred
+                colour, <br>
+                &nbsp;&nbsp;size and add £10 per shirt to the entry fee.
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal Hotel Details -->
 <div class="modal fade" id="hotelDetails" tabindex="-1" role="dialog" aria-labelledby="hotelDetailsTitle"
     aria-hidden="true">
@@ -180,21 +308,23 @@ system which you have to apply for yourself. This process would take about three
 
                 &nbsp;&nbsp;54 Surawong Road, Silom, Bangrak, Bangkok 10500 Thailand<br><br>
 
+                &nbsp;&nbsp;You may contact Mr. Krisanon Boontham, Director of Sales and Marketing at Montien Hotel,<br>
+                &nbsp;&nbsp;Surawong, Bangkok at this email address for direct hotel reservation:
                 <p>
-                    &nbsp;&nbsp;Contact Person:<br><br>
-                    &nbsp;&nbsp;Miss Pan Panmarerng<br>
-                    &nbsp;&nbsp;Corporate & MICE<br><br>
-                    &nbsp;&nbsp;Mobile: +66 (0) 90 969 2002<br>
-                    &nbsp;&nbsp;Telephone: +66 (0) 2209 8888 Ext. 2415<br>
-                    &nbsp;&nbsp;Email: h1031-sl2@accor.com
+                    &nbsp;&nbsp;krisanon.bu@montienbangkok.com<br><br>
+                    &nbsp;&nbsp;https://montienbangkok.com/th/<br>
+                    &nbsp;&nbsp;Mobile: +66 (0) 81 610-6567<br>
+                    &nbsp;&nbsp;Phone: +66 (0) 2 233-7060
                 </p>
-
-                <h5>Roomrates:</h5>
-                &nbsp;&nbsp;Deluxe room for twin bed inclusive of breakfast<br><br>
-                &nbsp;&nbsp;Special contract room rate for Asia & Oceania Q School <br>
-                &nbsp;&nbsp;2,500 Thai baht/day for single and 2,900 Thai baht/day for double.<br>
-                &nbsp;&nbsp;Trilple Superior: 2,000 Thai baht net<br>
-                &nbsp;&nbsp;Additional 1,500 Thai/baht for another person with extra bed
+                &nbsp;&nbsp;Single deluxe room rate: 2,500 Thai baht net inclusive of breakfast<br>
+                &nbsp;&nbsp;Twin deluxe room rate: 2,900 Thai baht net inclusive of breakfast for two <br>
+                &nbsp;&nbsp;Triple room with an extra bed: Additional 1,500 Thai baht net inclusive of breakfast<br><br>
+                &nbsp;&nbsp;The 5 stars hotel situated on the heart of Bangkok within the walking distance from the
+                famous <br>
+                &nbsp;&nbsp;Patpong area with variety of restaurants and only 5 mins ride to the venue.<br><br>
+                &nbsp;&nbsp;You may contact the hotel directly at the given contact person for reservation to enjoy
+                these
+                <br>&nbsp;&nbsp;special rates. Be sure to mention that you are Asia Oceania Q School entrant
             </div>
         </div>
     </div>

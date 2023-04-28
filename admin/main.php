@@ -24,8 +24,6 @@ if (!isset($_SESSION['user'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>asia-oceania-q-school ( Admin Dashboard )
-
-
     </title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -87,11 +85,13 @@ if (!isset($_SESSION['user'])) {
                                 <tr>
                                     <th width="5%">No.</th>
                                     <th width="10%">Apply Date</th>
+                                    <th>Entry Form No.</th>
                                     <th>Payment status</th>
                                     <th>Email</th>
                                     <th>First Name</th>
                                     <th>Middle Name</th>
                                     <th>Family Name</th>
+                                    <th>Country</th>
                                     <th width="10%"></th>
                                 </tr>
                             </thead>
@@ -264,15 +264,33 @@ if (!isset($_SESSION['user'])) {
                     output += '<tr>';
                     output += '<td>' + parseInt(i + 1) + '</td>';
                     output += '<td>' + data[i]['created'] + '</td>';
+                    output += '<td>' + data[i]['id'] + '</td>';
+                    let tshirt_priceTHB = data[i]['tshirt'] * 425;
+                    let tshirt_priceEURO = data[i]['tshirt'] * 10;
+                    total_priceTHB = 17000 + tshirt_priceTHB;
+                    total_priceEURO = 400 + tshirt_priceEURO;
+                    output += '<td>';
+                    // output += '<p>tshirt ' + data['tshirt'] + ' ea = £' + tshirt_priceEURO +
+                    //     ' or ' +
+                    //     tshirt_priceTHB + 'THB</p>';
+                    // output += '<p>application = £400 or 17000 THB</p>';
+                    // output += '<p class = "text-info">Total price = £' + total_priceEURO + ' or ' +
+                    //     total_priceTHB +
+                    //     ' THB</p>';
+                    output += 'Total price : <span class = "text-secondary">' + total_priceTHB +
+                        '</span><br>';
                     if (data[i]['payment_status'] == '1') {
-                        output += '<td class = "text-success">paid</td>';
+                        output += '<span class = "badge badge-success">paid</span>'
                     } else {
-                        output += '<td class = "text-warning">waiting for pay</td>';
+                        output += '<span class = "badge badge-warning">pending payment</span>';
                     }
+                    output += '</td>';
+
                     output += '<td>' + data[i]['email'] + '</td>';
                     output += '<td>' + data[i]['firstname'] + '</td>';
                     output += '<td>' + data[i]['middlename'] + '</td>';
                     output += '<td>' + data[i]['familyname'] + '</td>';
+                    output += '<td>' + data[i]['country'] + '</td>';
                     output += '<td>' + '<button class = "btn btn-outline-info btn-sm" value="' +
                         data[i]['id'] + '" onclick = "callpdf(' + "'" + data[i][
                             'id'

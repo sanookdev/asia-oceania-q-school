@@ -4,11 +4,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;1,300&display=swap');
 html,
 body {
-    background-image: url('../pictures/bg/bg-sanooker2022.jpg');
+    background-image: url('../pictures/bg/bg-2023-1.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
-	  background-position: 0 25%;
+    background-position: 0 5%;
     /* font-family: 'Numans', sans-serif; */
     font-family: 'Kanit', sans-serif;
 }

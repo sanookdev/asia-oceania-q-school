@@ -30,7 +30,8 @@
                     <p style="color:white">Asia Oceania Q School 2023 </p>
                     <!-- <p style="color:red">(login system maintenance)</p> -->
                     <div class="d-flex justify-content-end social_icon">
-                        <span onclick="window.open('https://www.facebook.com/thailandsnooker/','_blank')"><i
+                        <span
+                            onclick="window.open('https://www.facebook.com/BsatTH?mibextid=ZbWKwL%E2%80%8B','_blank')"><i
                                 class="fab fa-facebook-square"></i></span>
                         <span onclick="window.open('http://www.thailandsnooker.org/','_blank')">
                             <i class="fa fa-globe" aria-hidden="true"></i>
@@ -53,10 +54,10 @@
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
                             <input type="password" name="password" class="form-control"
-                                placeholder="Passport Or Thai Citizen ID." minlength="4" required>
+                                placeholder="Passport No. or Thai Citizenship I.D." minlength="4" required>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Login" class="btn btn-success btn-block btn_submit">
+                            <input type="submit" value="Log In" class="btn btn-success btn-block btn_submit">
                         </div>
                     </form>
                 </div>
@@ -91,7 +92,13 @@
 
 
     <script>
-    var countDownDate = new Date("May 16, 2022 12:00:00").getTime();
+    var countDownDate = new Date("Apr 24, 2023 12:00:00");
+    var now = new Date();
+    if (now >= countDownDate) {
+        $('#entryform').prop('hidden', false);
+    } else {
+        $('#entryform').prop('hidden', true);
+    }
 
     // // Update the count down every 1 second
     // var x = setInterval(function() {

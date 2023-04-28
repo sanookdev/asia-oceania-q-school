@@ -1,5 +1,14 @@
 <?php
-// require './data.php';
+// header('Content-Type: text/html; charset=utf-8');
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    echo "<script>
+    alert('username or password is invalid. you dont have permission.');
+    window.location.href = './logout.php';
+    </script>"; 
+    exit();
+}
 if(isset($_GET['personal_id'])){
     $personal_id = $_GET['personal_id'];
     require('./services.php');
@@ -23,6 +32,9 @@ function writeToPdf($pdf,$x,$y,$data) {
         $pdf->Write(0,$data);
     }
 }
+
+// $pdf->SetFont('cp874');
+
 /* set the source file */
 $pageCount = $pdf->setSourceFile("../../application.pdf");
 for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
@@ -30,9 +42,12 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
     /* add a page */
     $pdf->AddPage();
     $pdf->useTemplate($tplIdx);
-    $pdf->SetFont('Helvetica');
+    $pdf->AddFont('SukhumvitSet-Medium','','SukhumvitSet-Medium.php');
+    $pdf->AddFont('courier','','courier.php');
+    $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+    $pdf->SetFont('courier','B');
     $pdf->SetFontSize(8.5);
-    $pdf->SetTextColor(16, 16, 16);
+    $pdf->SetTextColor(32, 80, 110);
     if($pageNo == 1){
         writeToPdf($pdf,30,84.5,$data['prefix']);
         if ($data['id'] < 10) {
@@ -66,7 +81,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             writeToPdf($pdf,60,190.5,date('d-m-Y',strtotime($data['dateofarrival'])));
         }
         writeToPdf($pdf,107,190,$data['airline']);
-        writeToPdf($pdf,52,198,$data['flightNo']);
+        writeToPdf($pdf,158,190,$data['flightNo']);
         //  writeToPdf($pdf,65,239,$data['dateofdeparture']);
         writeToPdf($pdf,57,214,$data['partyNo']);
         writeToPdf($pdf,30,237.5,$data['firstnameParty1']);
@@ -80,32 +95,60 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
     // end page 1
     else if($pageNo == 2){
       
-        writeToPdf($pdf,79,78.5,$data['hotelReservation']);
-        writeToPdf($pdf,139,78.5,$data['typeRoom']);
+        writeToPdf($pdf,79,78.5 + 16.2,$data['hotelReservation']);
+        writeToPdf($pdf,139,78.5 + 16.2,$data['typeRoom']);
     }
     // end page 2
     else if($pageNo == 3){
+        // session T-Shirt
+        $blackNo = $data['tshirtblack'];
+        writeToPdf($pdf,55,38.5,$blackNo);
+
+        $blackDetails = $data['tshirtblack_details'];
+        writeToPdf($pdf,81,38.5,$blackDetails);
+
+        $blackPriceEuro = $blackNo * 10;
+        $blackPriceTHB = $blackNo * 425; 
+        writeToPdf($pdf,158,38.5,$blackPriceEuro.' EURO or '. $blackPriceTHB.' THB');
+
+        
+        $whiteNo = $data['tshirtwhite'];
+        writeToPdf($pdf,55,46,$whiteNo);
+
+        $whiteDetails = $data['tshirtwhite_details'];
+        writeToPdf($pdf,81,46,$whiteDetails);
+
+        $whitePriceEuro = $whiteNo * 10;
+        $whitePriceTHB = $whiteNo * 425;
+        writeToPdf($pdf,158,46,$whitePriceEuro.' EURO or '. $whitePriceTHB.' THB');
+
+
+
         $address = $data['homeAddress'];
         $address = preg_replace( "/\r|\n/", "", $address );
         $address = chunk_split($address,45,"******");
         $address = explode('******',$address);
-        $startAddressY = 113; // 94
+        $startAddressY = 113+87; // 94
         for($i = 0 ; $i < count($address) ; $i++){
             writeToPdf($pdf,30,$startAddressY,$address[$i]);
-            $startAddressY = $startAddressY + 5.1;
+            $startAddressY = $startAddressY + 5.1 ;
         }
         //  end home address
 
-        writeToPdf($pdf,63,146.5,$data['email']);
-        writeToPdf($pdf,143,146.5,$data['mobile']);
-        writeToPdf($pdf,50,153.5,$data['facebook']);
-        writeToPdf($pdf,113,153.5,$data['twitter']);
-        writeToPdf($pdf,162,153.5,$data['line_id']);
-        writeToPdf($pdf,45,161.5,$data['weibo_id']);
-        writeToPdf($pdf,110,161,$data['whatsapp_id']);
-        writeToPdf($pdf,163,161.5,$data['wechat_id']);
+        writeToPdf($pdf,63,146.5+86.8,$data['email']);
+        writeToPdf($pdf,143,146.5+86.8,$data['mobile']);
+        writeToPdf($pdf,50,153.5+86.9,$data['facebook']);
+        writeToPdf($pdf,113,153.5+86.9,$data['twitter']);
+        writeToPdf($pdf,162,153.5+86.9,$data['line_id']);
+        writeToPdf($pdf,45,161.5+86.9,$data['weibo_id']);
+        writeToPdf($pdf,110,161+86.9,$data['whatsapp_id']);
+        writeToPdf($pdf,163,161.5+86.9,$data['wechat_id']);
+        // $applyDate = date('d-m-Y',strtotime($data['created']));
+        // writeToPdf($pdf,55,238,$applyDate);
+    }else if($pageNo == 4){
+      
         $applyDate = date('d-m-Y',strtotime($data['created']));
-        writeToPdf($pdf,55,238,$applyDate);
+        writeToPdf($pdf,55,84,$applyDate);
     }
 }
 
