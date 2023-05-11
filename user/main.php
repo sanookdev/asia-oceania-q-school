@@ -142,41 +142,34 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
 
     <script type="text/javascript" src="https://cdn.omise.co/omise.js"></script>
 
-    <script src="https://cdn.omise.co/omise.js"></script>
-    <script>
-    function setOmise(total_priceTHB) {
-        var amount = total_priceTHB * 100;
-
-        Omise.setPublicKey('pkey_test_5v9mkntvtg6u58w5jut'); // กำหนดค่า public key ของคุณ
-        OmiseCard.configure({
-            publicKey: 'pkey_test_5v9mkntvtg6u58w5jut',
-            frameLabel: 'BSAT THAILAND',
-            submitLabel: 'PAY NOW',
-            currency: 'THB',
-            image: 'http://localhost/asia-oceania-q-school/pictures/logo/BSAT-Logo.jpg',
-            amount: amount, // กำหนดค่า amount ให้กับ OmiseCard
-        });
-
-        var button = document.querySelector('#checkout-button');
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
-            OmiseCard.open({
-                amount: amount,
-                onCreateTokenSuccess: function(token) {
-                    var form = document.querySelector('#payment-form');
-                    form.omiseToken.value = token;
-                    form.amount.value = amount;
-                    form.submit();
-                },
-            });
-        });
-    }
-    </script>
 
     <script>
     $(document).ready(() => {
         const username = <?= json_encode($_SESSION['user']);?>;
         const personal_id = <?= json_encode($_SESSION['personal_id']);?>;
+
+        setOmise = (amount) => {
+            OmiseCard.configure({
+                publicKey: 'pkey_test_5vhvxzw47q7827bebv4',
+                image: 'http://localhost/asia-oceania-q-school/pictures/logo/BSAT-Logo.jpg',
+                frameLabel: 'BSAT THAILAND',
+                currency: "THB",
+                amount: amount
+            });
+
+            // Configuring your own custom button
+            OmiseCard.configureButton('#checkout-button', {
+                buttonLabel: 'PAY Now ' + amount / 100 + '.00 THB',
+                submitLabel: 'PAY NOW',
+                amount: amount
+            });
+
+            $('#amount').val(amount);
+            OmiseCard.attach();
+        }
+
+
+
 
         callpdf = (personal_id) => {
             if (personal_id != '') {
@@ -203,6 +196,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
                             '</a></div>'
                     }
                     output += '</div>';
+
                 } else {
                     output += '<div class = "alert alert-danger">Folder is Empty</div>';
                 }
@@ -220,8 +214,8 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
         }).then((res) => {
             let data = res.data.data;
             output = '';
-            var total_priceTHB = 0;
-            var total_priceEURO = 0;
+            let total_priceEURO = 0;
+            let total_priceTHB = 0;
             if (res.data.message != 'nodata') {
                 if (data['id'] < 10) {
                     data['id'] = '00' + data['id'];
@@ -236,36 +230,33 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
                 output += '<td>' + data['middlename'] + '</td>';
                 output += '<td>' + data['familyname'] + '</td>';
 
-                let classPaymentStatus = (data['payment_status'] == 1) ? 'badge badge-success' :
-                    'badge badge-warning';
+                let buttonPayment =
+                    '<form id="payment-form" method="POST" action="./api/charge.php"><input type="hidden" name="omiseToken"><input type = "hidden" id = "amount" name = "amount" value = "100000"><p><button class="btn btn-outline-info btn-sm float-right" type="submit" id="checkout-button">PAY NOW</button></p> </form>';
+
+                let classPaymentStatus = (data['payment_status'] == 1) ? 'text text-success' :
+                    'text text-danger';
                 let messagePayment = (data['payment_status'] == 1) ? 'paid' :
                     'pending payment';
 
-
-                let tshirt_priceTHB = data['tshirt'] * 425;
-                let tshirt_priceEURO = data['tshirt'] * 10;
+                let tshirt_priceTHB = (parseInt(data['tshirtblack']) + parseInt(data['tshirtwhite'])) *
+                    425;
+                let tshirt_priceEURO = (parseInt(data['tshirtblack']) + parseInt(data['tshirtwhite'])) *
+                    10;
                 total_priceTHB = 17000 + tshirt_priceTHB;
                 total_priceEURO = 400 + tshirt_priceEURO;
 
                 output += '<td>';
-                output += '<p>tshirt ' + data['tshirt'] + ' ea = £' + tshirt_priceEURO + ' or ' +
+                output += '<p>tshirt ' + (parseInt(data['tshirtblack']) + parseInt(data[
+                        'tshirtwhite'])) +
+                    ' ea = £' +
+                    tshirt_priceEURO + ' or ' +
                     tshirt_priceTHB + 'THB</p>';
                 output += '<p>application = £400 or 17000 THB</p>';
-                output += '<p class = "text-info">Total price = £' + total_priceEURO + ' or ' +
+                output += '<p class = "text-success">Total price = £' + total_priceEURO + ' or ' +
                     total_priceTHB +
                     ' THB</p>';
-                output += 'Payment status : ';
-                output += '<span class = "' + classPaymentStatus + '">' +
-                    messagePayment;
-                output += '</span>';
-
-                if (data['payment_status'] != 1) {
-                    output += `<form id="payment-form" action="./api/charge.php" method="POST">
-                                <input type="hidden" name="omiseToken">
-                                <input type="hidden" name="amount">
-                                <button type="submit" id="checkout-button">ชำระเงิน</button>
-                                </form>`;
-                }
+                output += '<small class = "' + classPaymentStatus + '">' + messagePayment + '</small>';
+                output += buttonPayment;
                 output += '</td>';
                 output += '<td>' + '<button class = "btn btn-outline-info btn-sm" value="' +
                     data['id'] + '" onclick = "callpdf(' + "'" + data[
@@ -282,9 +273,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
             }
 
             $('.fetch_data').html(output);
-            if (data['payment_status'] != 1) {
-                setOmise(total_priceTHB);
-            };
+            setOmise(total_priceTHB * 100);
             // var table = $('#dataTable').DataTable({
             //     lengthChange: false,
             //     searching: false
@@ -342,5 +331,9 @@ tr td .btn {
 
 table tbody td {
     cursor: pointer;
+}
+
+#checkout-button {
+    width: 100%;
 }
 </style>

@@ -36,9 +36,9 @@ class DB_con{
             return $error;
         }else{
             if($query->num_rows > 0){
-                return false;
+                return 1;
             }else{
-                return true;
+                return 0;
             }
         }
     }
@@ -47,28 +47,34 @@ class DB_con{
 
 
     public function register($data, $table){
-        $keys = '';
-        $values = '';
-        $lastData = count($data);
-        $i = 0 ;
-        foreach ($data as $key => $value) {
-            $keys .= '`'.$key.'`';
-            $values .= "'".$value."'";
-            if(++$i != $lastData) {
-                $keys .= ',';
-                $values .= ',';
-            }
-        }
-        $table = $table .'(' . $keys . ')';
-        $sql = "INSERT INTO $table VALUES(".$values.")";
-        $query = $this->dbcon->query($sql);
-        $return = array();
-        if (!$query) {
-            $return['message'] = "Error description: " . $this->dbcon->error;
+        $checkEmail = $this->checkDuplicateEmail($data['email']);
+        if($checkEmail == 1){
+            $return['message'] = 'This email has already been registered.';
             $return['status'] = false;
         }else{
-            $return['message'] = 'success';
-            $return['status'] = true;
+            $keys = '';
+            $values = '';
+            $lastData = count($data);
+            $i = 0 ;
+            foreach ($data as $key => $value) {
+                $keys .= '`'.$key.'`';
+                $values .= "'".$value."'";
+                if(++$i != $lastData) {
+                    $keys .= ',';
+                    $values .= ',';
+                }
+            }
+            $table = $table .'(' . $keys . ')';
+            $sql = "INSERT INTO $table VALUES(".$values.")";
+            $query = $this->dbcon->query($sql);
+            $return = array();
+            if (!$query) {
+                $return['message'] = "Error description: " . $this->dbcon->error;
+                $return['status'] = false;
+            }else{
+                $return['message'] = 'success';
+                $return['status'] = true;
+            }
         }
         return $return;
     }

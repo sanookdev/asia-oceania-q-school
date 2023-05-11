@@ -69,16 +69,12 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
                                     <th>First Name</th>
                                     <th>Middle Name</th>
                                     <th>Family Name</th>
+                                    <th>Total price</th>
                                     <th width="10%"></th>
-                                    <th>Payment Status</th>
                                 </tr>
                             </thead>
                             <tbody class="fetch_data"></tbody>
                         </table>
-                        <form name="checkoutForm" method="POST" action="api/checkout.php">
-                            <p><button class="btn btn-outline-info btn-sm float-right" type="submit"
-                                    id="checkout-button-1"></button></p>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -152,19 +148,23 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
         const username = <?= json_encode($_SESSION['user']);?>;
         const personal_id = <?= json_encode($_SESSION['personal_id']);?>;
 
-        setOmise = () => {
+        setOmise = (amount) => {
             OmiseCard.configure({
-                publicKey: 'pkey_test_5v9mkntvtg6u58w5jut',
+                publicKey: 'pkey_test_5vhvxzw47q7827bebv4',
                 image: 'http://localhost/asia-oceania-q-school/pictures/logo/BSAT-Logo.jpg',
                 frameLabel: 'BSAT THAILAND',
+                currency: "THB",
+                amount: amount
             });
 
             // Configuring your own custom button
-            OmiseCard.configureButton('#checkout-button-1', {
-                buttonLabel: 'PAY Now 4,500 Baht',
+            OmiseCard.configureButton('#checkout-button', {
+                buttonLabel: 'PAY Now ' + amount / 100 + '.00 THB',
                 submitLabel: 'PAY NOW',
-                amount: 450000
+                amount: amount
             });
+
+            $('#amount').val(amount);
             OmiseCard.attach();
         }
 
@@ -214,6 +214,8 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
         }).then((res) => {
             let data = res.data.data;
             output = '';
+            let total_priceEURO = 0;
+            let total_priceTHB = 0;
             if (res.data.message != 'nodata') {
                 if (data['id'] < 10) {
                     data['id'] = '00' + data['id'];
@@ -229,13 +231,33 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
                 output += '<td>' + data['familyname'] + '</td>';
 
                 let buttonPayment =
-                    '<form name="checkoutForm" method="POST" action="checkout.php"><p><button class="btn btn-outline-info btn-sm float-right" type="submit" id="checkout-button-1"></button></p> </form>';
+                    '<form id="payment-form" method="POST" action="./api/charge.php"><input type="hidden" name="omiseToken"><input type = "hidden" id = "amount" name = "amount" value = "100000"><p><button class="btn btn-outline-info btn-sm float-right" type="submit" id="checkout-button">PAY NOW</button></p> </form>';
 
                 let classPaymentStatus = (data['payment_status'] == 1) ? 'text text-success' :
                     'text text-danger';
                 let messagePayment = (data['payment_status'] == 1) ? 'paid' :
-                    'waiting for payment';
+                    'pending payment';
 
+                let tshirt_priceTHB = (parseInt(data['tshirtblack']) + parseInt(data['tshirtwhite'])) *
+                    425;
+                let tshirt_priceEURO = (parseInt(data['tshirtblack']) + parseInt(data['tshirtwhite'])) *
+                    10;
+                total_priceTHB = 17000 + tshirt_priceTHB;
+                total_priceEURO = 400 + tshirt_priceEURO;
+
+                output += '<td>';
+                output += '<p>tshirt ' + (parseInt(data['tshirtblack']) + parseInt(data[
+                        'tshirtwhite'])) +
+                    ' ea = £' +
+                    tshirt_priceEURO + ' or ' +
+                    tshirt_priceTHB + 'THB</p>';
+                output += '<p>application = £400 or 17000 THB</p>';
+                output += '<p class = "text-success">Total price = £' + total_priceEURO + ' or ' +
+                    total_priceTHB +
+                    ' THB</p>';
+                output += '<small class = "' + classPaymentStatus + '">' + messagePayment + '</small>';
+                output += buttonPayment;
+                output += '</td>';
                 output += '<td>' + '<button class = "btn btn-outline-info btn-sm" value="' +
                     data['id'] + '" onclick = "callpdf(' + "'" + data[
                         'id'
@@ -244,15 +266,14 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
                     data['id'] + '" onclick = "viewPhoto()"><i class="fas fa-folder"></i></button>';
                 output += '<button class = "btn btn-outline-info btn-sm btn_edit ml-2" value="' +
                     data['id'] +
-                    '" onclick = "editProfile()"><i class="fas fa-edit"></i></button>';
+                    '" onclick = "editProfile()"><i class="fas fa-upload"></i></button>';
                 output += '</td>';
-                output += '<td class = "' + classPaymentStatus + '">' + messagePayment;
-                output += '</td>';
+
                 output += '</tr>';
             }
 
             $('.fetch_data').html(output);
-            setOmise();
+            setOmise(total_priceTHB * 100);
             // var table = $('#dataTable').DataTable({
             //     lengthChange: false,
             //     searching: false
@@ -310,5 +331,9 @@ tr td .btn {
 
 table tbody td {
     cursor: pointer;
+}
+
+#checkout-button {
+    width: 100%;
 }
 </style>
