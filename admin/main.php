@@ -92,6 +92,15 @@ if (!isset($_SESSION['user'])) {
                                     <th>Middle Name</th>
                                     <th>Family Name</th>
                                     <th>Country</th>
+
+                                    <!--  -->
+                                    <th>Tshirt</th>
+                                    <th>Tshirt black</th>
+                                    <th>Tshirt black details</th>
+                                    <th>Tshirt white</th>
+                                    <th>Tshirt white details</th>
+
+                                    <!--  -->
                                     <th width="10%"></th>
                                 </tr>
                             </thead>
@@ -257,16 +266,25 @@ if (!isset($_SESSION['user'])) {
         axios.post('./api/informations.php', {
             action: 'listRegister'
         }).then((res) => {
+            console.log(res);
             let data = res.data.data;
             output = '';
             if (res.data.message != 'nodata') {
                 for (i = 0; i < data.length; i++) {
+                    // let file = this.viewPhoto(data[i]['id']);
+                    // console.log(data[i]['id'], file);
                     output += '<tr>';
                     output += '<td>' + parseInt(i + 1) + '</td>';
                     output += '<td>' + data[i]['created'] + '</td>';
                     output += '<td>' + data[i]['id'] + '</td>';
-                    let tshirt_priceTHB = data[i]['tshirt'] * 425;
-                    let tshirt_priceEURO = data[i]['tshirt'] * 10;
+                    let tshirt_priceTHB = (parseInt(data[i]['tshirtblack']) + parseInt(data[i][
+                            'tshirtwhite'
+                        ])) *
+                        425;
+                    let tshirt_priceEURO = (parseInt(data[i]['tshirtblack']) + parseInt(data[i][
+                            'tshirtwhite'
+                        ])) *
+                        10;
                     total_priceTHB = 17000 + tshirt_priceTHB;
                     total_priceEURO = 400 + tshirt_priceEURO;
                     output += '<td>';
@@ -279,10 +297,17 @@ if (!isset($_SESSION['user'])) {
                     //     ' THB</p>';
                     output += 'Total price : <span class = "text-secondary">' + total_priceTHB +
                         '</span><br>';
-                    if (data[i]['payment_status'] == '1') {
-                        output += '<span class = "badge badge-success">paid</span>'
+
+                    if (data[i]['waitingConfirm'] && data[i]['payment_status'] != '1') {
+                        output +=
+                            '<span class = "badge badge-info">Waiting for balance verificatio</span>';
                     } else {
-                        output += '<span class = "badge badge-warning">pending payment</span>';
+                        if (data[i]['payment_status'] == '1') {
+                            output += '<span class = "badge badge-success">paid</span>'
+                        } else {
+                            output += '<span class = "badge badge-warning">pending payment</span>';
+                        }
+
                     }
                     output += '</td>';
 
@@ -291,6 +316,13 @@ if (!isset($_SESSION['user'])) {
                     output += '<td>' + data[i]['middlename'] + '</td>';
                     output += '<td>' + data[i]['familyname'] + '</td>';
                     output += '<td>' + data[i]['country'] + '</td>';
+                    // 
+                    output += '<td>' + data[i]['tshirt'] + '</td>';
+                    output += '<td>' + data[i]['tshirtblack'] + '</td>';
+                    output += '<td>' + data[i]['tshirtblack_details'] + '</td>';
+                    output += '<td>' + data[i]['tshirtwhite'] + '</td>';
+                    output += '<td>' + data[i]['tshirtwhite_details'] + '</td>';
+                    // 
                     output += '<td>' + '<button class = "btn btn-outline-info btn-sm" value="' +
                         data[i]['id'] + '" onclick = "callpdf(' + "'" + data[i][
                             'id'

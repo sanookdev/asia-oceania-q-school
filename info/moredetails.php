@@ -154,16 +154,19 @@ system which you have to apply for yourself. This process would take about three
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h5>The Grand Ballroom, Royal Bangkok Sports Club (RBSC):</h5>
-                <b>Website</b>:
-                <a href="https://www.rbsc.org/" target="_blank">
-                    https://www.rbsc.org/
-                </a><br>
+                <b>Competition Venue:</b>
+                <h5>BSAT Academy, Rajamangala National Stadium</h5>
                 <b>Venue address:</b><br>
-                1 Henry Dunant Road, Pathumwan, Bangkok 10330 Tel: +662 028-7272<br>
-                I hereby confirm to take part in this year Asia & Oceania Q School and will be fully responsible for all
-                the costs effective on my own expenses.
-
+                286 2nd floor, Zone E4
+                Rajamangala National Stadium
+                Huamak, Bangkapi
+                Bangkok 10240
+                Thailand
+                <br>
+                <b>Tel: +662 369-1506</b>
+                <br>
+                Google Map Keyword: Rajamangala National Stadium, Ram Khamhaeng Road
+                Huamak, Bangkapi, Bangkok
             </div>
         </div>
     </div>
@@ -300,28 +303,30 @@ system which you have to apply for yourself. This process would take about three
                 <h6>You may make direct reservation with the hotel to this contact:</h6>
                 <h5>Accommodation:</h5>
 
-                &nbsp;&nbsp;<b>Montien Hotel Surawong, Bangkok (5 stars)</b> <br>
-                &nbsp;&nbsp;(5 minutes’ ride to the venue by car, 20 minutes’ walk)
+                &nbsp;&nbsp;<b>Bangkok Inter Place Hotel</b> <br>
+                <!-- &nbsp;&nbsp;(5 minutes’ ride to the venue by car, 20 minutes’ walk) -->
                 <br><br>
 
                 <h5>Hotel Address:</h5>
 
-                &nbsp;&nbsp;54 Surawong Road, Silom, Bangrak, Bangkok 10500 Thailand<br><br>
+                &nbsp;&nbsp;118/92 Ram Kamhaeng Road Soi 24
+                Huamak, Bangkapi, Bangkok 10240
+                Bangkok 10500<br><br>
 
-                &nbsp;&nbsp;You may contact Mr. Krisanon Boontham, Director of Sales and Marketing at Montien Hotel,<br>
-                &nbsp;&nbsp;Surawong, Bangkok at this email address for direct hotel reservation:
-                <p>
-                    &nbsp;&nbsp;krisanon.bu@montienbangkok.com<br><br>
-                    &nbsp;&nbsp;https://montienbangkok.com/th/<br>
-                    &nbsp;&nbsp;Mobile: +66 (0) 81 610-6567<br>
-                    &nbsp;&nbsp;Phone: +66 (0) 2 233-7060
+                &nbsp;&nbsp;You may contact Miss Piramon Yossing (Nan), Assistant Director of Sales and Marketing
+                <br>&nbsp;&nbsp;at Bangkok Inter Place Hotel at this email address for direct hotel reservation:
+                <p><br>
+                    &nbsp;&nbsp;piramon.nan@gmail.com<br>
+                    &nbsp;&nbsp;http://www.bangkokinterplace.com/<br>
+                    &nbsp;&nbsp;Mobile: +66 (0) 65 839-7465<br>
+                    &nbsp;&nbsp;Phone: +66 (0) 2 319-0330 ext. 2206
                 </p>
-                &nbsp;&nbsp;Single deluxe room rate: 2,500 Thai baht net inclusive of breakfast<br>
-                &nbsp;&nbsp;Twin deluxe room rate: 2,900 Thai baht net inclusive of breakfast for two <br>
-                &nbsp;&nbsp;Triple room with an extra bed: Additional 1,500 Thai baht net inclusive of breakfast<br><br>
-                &nbsp;&nbsp;The 5 stars hotel situated on the heart of Bangkok within the walking distance from the
-                famous <br>
-                &nbsp;&nbsp;Patpong area with variety of restaurants and only 5 mins ride to the venue.<br><br>
+                &nbsp;&nbsp;Single/twin deluxe room rate: 1,500 Thai baht net inclusive of breakfast<br>
+                &nbsp;&nbsp;Single/twin studio room rate: 2,000 Thai baht net inclusive of breakfast for two <br>
+                &nbsp;&nbsp;Triple room with an extra bed: Additional 600 Thai baht net inclusive of breakfast<br><br>
+                &nbsp;&nbsp;The 4 stars hotel is only 10 mins walk to the venue stadium with variety of restaurants
+                around
+                <br>&nbsp;&nbsp;the hotel including halal food. <br><br>
                 &nbsp;&nbsp;You may contact the hotel directly at the given contact person for reservation to enjoy
                 these
                 <br>&nbsp;&nbsp;special rates. Be sure to mention that you are Asia Oceania Q School entrant

@@ -62,7 +62,8 @@
                     </form>
                 </div>
                 <div class="card-footer">
-                    <a href="../entry-pack.pdf" target="_blank" class="float-left" style="color:white!important;">Entry
+                    <a href="../entry-pack.pdf" target="_blank" class="float-left" style="color:white!important;">Latest
+                        Entry
                         Pack</a>
                     <a href="../entry-form" id="entryform" class="float-right" style="color:white!important;">Entry
                         Form</a>
@@ -92,40 +93,43 @@
 
 
     <script>
-    var countDownDate = new Date("Apr 24, 2023 12:00:00");
+    var countDownDate = new Date("May 20, 2023 00:00:00");
+
+    console.log(countDownDate);
     var now = new Date();
-    if (now >= countDownDate) {
-        $('#entryform').prop('hidden', false);
-    } else {
-        $('#entryform').prop('hidden', true);
-    }
 
-    // // Update the count down every 1 second
-    // var x = setInterval(function() {
+    // Update the count down every 1 second
+    var x = setInterval(function() {
 
-    //     // Get today's date and time
-    //     var now = new Date().getTime();
+        // Get today's date and time
+        var now = new Date().getTime();
 
-    //     // Find the distance between now and the count down date
-    //     var distance = countDownDate - now;
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        // Time calculations for days, hours, minutes and seconds
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    //     // Time calculations for days, hours, minutes and seconds
-    //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Output the result in an element with id="demo"
+        document.getElementById("demo").innerHTML = 'Countdown for Entry close : ' + days + "d " + hours +
+            "h " +
+            minutes + "m " + seconds + "s ";
 
-    //     // Output the result in an element with id="demo"
-    //     document.getElementById("demo").innerHTML = 'Countdown for Entry close : ' + hours +
-    //         "h " +
-    //         minutes + "m " + seconds + "s ";
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            clearInterval(x);
+            $('#entryform').prop('hidden', true);
+            document.getElementById("demo").innerHTML = "Entry is closed";
+            document.getElementById('entryform').href = '#';
+        } else {
+            $('#entryform').prop('hidden', false);
 
-    //     // If the count down is over, write some text 
-    //     if (distance < 0) {
-    //         clearInterval(x);
-    //         document.getElementById("demo").innerHTML = "Entry is closed";
-    //         document.getElementById('entryform').href = '#';
-    //     }
-    // }, 1000);
+        }
+    }, 1000);
+
+
     $(document).ready(function() {
         console.log('ready jquery function ')
         $('#loginForm').on('submit', (e) => {

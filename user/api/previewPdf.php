@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION['user'])) {
     echo "<script>
     alert('username or password is invalid. you dont have permission.');
-    window.location.href = '../logout.php';
+    window.location.href = './logout.php';
     </script>"; 
     exit();
 }
@@ -95,8 +95,8 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
     // end page 1
     else if($pageNo == 2){
       
-        writeToPdf($pdf,79,78.5 + 16.2,$data['hotelReservation']);
-        writeToPdf($pdf,139,78.5 + 16.2,$data['typeRoom']);
+        writeToPdf($pdf,79,78.5 + 32,$data['hotelReservation']);
+        writeToPdf($pdf,139,78.5 + 32,$data['typeRoom']);
     }
     // end page 2
     else if($pageNo == 3){
@@ -105,22 +105,22 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
         writeToPdf($pdf,55,38.5,$blackNo);
 
         $blackDetails = $data['tshirtblack_details'];
-        writeToPdf($pdf,81,38.5,$blackDetails);
+        writeToPdf($pdf,83,38.5,$blackDetails);
 
         $blackPriceEuro = $blackNo * 10;
         $blackPriceTHB = $blackNo * 425; 
-        writeToPdf($pdf,158,38.5,$blackPriceEuro.' EURO or '. $blackPriceTHB.' THB');
+        writeToPdf($pdf,160,38.5,$blackPriceEuro.' EURO or '. $blackPriceTHB.' THB');
 
         
         $whiteNo = $data['tshirtwhite'];
         writeToPdf($pdf,55,46,$whiteNo);
 
         $whiteDetails = $data['tshirtwhite_details'];
-        writeToPdf($pdf,81,46,$whiteDetails);
+        writeToPdf($pdf,83,46,$whiteDetails);
 
         $whitePriceEuro = $whiteNo * 10;
         $whitePriceTHB = $whiteNo * 425;
-        writeToPdf($pdf,158,46,$whitePriceEuro.' EURO or '. $whitePriceTHB.' THB');
+        writeToPdf($pdf,160,46,$whitePriceEuro.' EURO or '. $whitePriceTHB.' THB');
 
 
 
@@ -148,7 +148,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
     }else if($pageNo == 4){
       
         $applyDate = date('d-m-Y',strtotime($data['created']));
-        writeToPdf($pdf,55,84,$applyDate);
+        writeToPdf($pdf,50,84,$applyDate);
     }
 }
 

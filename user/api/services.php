@@ -10,7 +10,6 @@ class DB_con{
             exit();
           }
     }
-
     public function checkPayment($id){
         $sql = "SELECT payment_status FROM info_personal WHERE id = $id LIMIT 1";
         $query =$this->dbcon->query($sql);
@@ -21,7 +20,6 @@ class DB_con{
             return 0;
         }
     }
-    
     public function checkUserLogin($email){
         $sql = "SELECT prefix,firstname, id,email , idcard , passportNo FROM info_personal WHERE email = '$email' LIMIT 1";
         $query = $this->dbcon->query($sql);

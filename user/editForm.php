@@ -249,9 +249,50 @@ if(!isset($_SESSION['user'])){
                                 <option value="">Choose</option>
                                 <option value="Single">Single</option>
                                 <option value="Twin">Twin</option>
+                                <option value="Trilple">Trilple</option>
                             </select>
                         </div>
                     </div>
+                    <hr>
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#tshirtDetails">
+                        <i class="fa fa-info-circle"></i>
+                        Asia Oceania Q School T-shirt details:
+                    </a>
+                    <div class="form-row mt-3">
+                        <div class="col-md-4">
+                            <label for="tshirt">T-shirt order (Please select your preference)</label>
+                            <select name="tshirt" id="tshirt" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row mt-3">
+                        <div class="col-md-4">
+                            <label for="tshirtblack">Black colour</label>
+                            <input placeholder="How many" type="number" class="form-control" name="tshirtblack"
+                                id="tshirtblack" min="0">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tshirtblack_details">Black colour size details</label>
+                            <input type="text" class="form-control" name="tshirtblack_details"
+                                id="tshirtblack_details" />
+                        </div>
+                    </div>
+                    <div class="form-row mt-3">
+                        <div class="col-md-4">
+                            <label for="tshirtwhite">White colour</label>
+                            <input placeholder="How many" type="number" class="form-control" name="tshirtwhite"
+                                id="tshirtwhite" min="0">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tshirtwhite_details">White colour size details</label>
+                            <input type="text" class="form-control" name="tshirtwhite_details"
+                                id="tshirtwhite_details" />
+                        </div>
+                    </div>
+
                     <hr>
                     <h5>Other Information:</h5>
                     <!-- <a class="btn btn-primary mt-2" data-toggle="modal" data-target="#testGoProcedure">
@@ -443,7 +484,23 @@ if(!isset($_SESSION['user'])){
             $.each($("#form_register").serializeArray(), function(i, field) {
                 datas[field.name] = field.value;
             });
-            console.log(datas);
+
+            if (datas['tshirt'] == 0) {
+                datas['tshirt'] = 0;
+                datas['tshirtblack'] = 0;
+                datas['tshirtwhite'] = 0;
+                datas['tshirtblack_details'] = '';
+                datas['tshirtwhite_details'] = '';
+            }
+            if (datas['tshirtblack'] == 0) {
+                datas['tshirtblack_details'] = '';
+            }
+            if (datas['tshirtwhite'] == 0) {
+                datas['tshirtwhite_details'] = '';
+            }
+            if (datas['tshirtblack'] == 0 && datas['tshirtwhite'] == 0) {
+                datas['tshirt'] = 0;
+            }
 
             axios.post('./api/informations.php', {
                 action: 'updateProfile',
@@ -478,6 +535,59 @@ if(!isset($_SESSION['user'])){
                 $('#typeRoom').prop('disabled', true);
             }
         })
+
+        $('#tshirt').on('change', () => {
+            let val = $('#tshirt').find(":selected").val();
+            console.log(val);
+            if (val == '1') {
+                $('#tshirtblack').prop('disabled', false);
+                $('#tshirtblack').prop('required', true);
+                $('#tshirtblack').val(0);
+                $('#tshirtwhite').prop('disabled', false);
+                $('#tshirtwhite').prop('required', true);
+                $('#tshirtwhite').val(0);
+            } else {
+                $('#tshirtblack').val('');
+                $('#tshirtwhite').val('');
+                $('#tshirtblack').prop('required', false);
+                $('#tshirtblack').prop('disabled', true);
+                $('#tshirtwhite').prop('required', false);
+                $('#tshirtwhite').prop('disabled', true);
+            }
+        })
+
+        $('#tshirtblack').on('change', () => {
+            let val = $('#tshirtblack').val();
+            let exampleSizeDetails = "Example. S = 1 , XL = 2 , 3XL = 2";
+            if (val > 0) {
+                $('#tshirtblack_details').prop('disabled', false);
+                $('#tshirtblack_details').prop('required', true);
+                $('#tshirtblack_details').prop('placeholder', exampleSizeDetails);
+            } else {
+                $('#tshirtblack').val(0);
+                $('#tshirtblack_details').prop('disabled', true);
+                $('#tshirtblack_details').prop('required', false);
+                $('#tshirtblack_details').prop('placeholder', false);
+            }
+        })
+
+        $('#tshirtwhite').on('change', () => {
+            let val = $('#tshirtwhite').val();
+            let exampleSizeDetails = "Example. S = 1 , XL = 2 , 3XL = 2";
+            console.log(val);
+            if (val > 0) {
+                $('#tshirtwhite_details').prop('disabled', false);
+                $('#tshirtwhite_details').prop('required', true);
+                $('#tshirtwhite_details').prop('placeholder', exampleSizeDetails);
+            } else {
+                $('#tshirtwhite').val(0);
+                $('#tshirtwhite_details').prop('disabled', true);
+                $('#tshirtwhite_details').prop('required', false);
+                $('#tshirtwhite_details').prop('placeholder', false);
+            }
+        })
+
+
         $('#formerProfessional').on('change', () => {
             let val = $('#formerProfessional').find(":selected").val();
             if (val == 'Yes') {

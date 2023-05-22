@@ -51,11 +51,11 @@
                     <img src="./pictures/logo/WST-Logo-Large.png" class="img-logo" alt="">
                     <img src="./pictures/logo/BSAT-Logo.jpg" class="img-logo" alt="">
                     <h5 style="color:white">Asia & Oceania Q School</h5>
-                    1 - 15 June 2023 Bangkok, Thailand <br>
+                    1 - 12 June 2023 Bangkok, Thailand <br>
                     <div class="btnGroup">
                         <a class="btn btn-warning btn-block mt-md-2" target="_blank" href="./entry-pack.pdf">
                             <i class="fa fa-info-circle"></i>
-                            Entry Pack
+                            Latest Entry Pack
                         </a>
                     </div>
 

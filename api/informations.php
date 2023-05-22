@@ -26,7 +26,7 @@ if ($_POST['action'] == 'register'){
 
 else if ($_POST['action'] == 'checkDuplicateEmail'){
     $email = trim($_POST['email']);
-    if($service->checkDuplicateEmail($email)){
+    if(!$service->checkDuplicateEmail($email)){
         $result['message'] = "You can use this email.";
         $result['status'] = true;
         $result['email'] = $email;

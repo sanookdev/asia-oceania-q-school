@@ -41,7 +41,7 @@
                     <img src="./pictures/logo/BSAT-Logo.jpg" class="img-logo mr-3" alt="">
                     <h4 class="mt-3 head-title">
                         Application form Asia & Oceania Q School 2023 <br>
-                        1 - 15 June 2023 <br>
+                        1 - 12 June 2023 <br>
                         Bangkok, Thailand
                     </h4>
                     <div class="mt-3">

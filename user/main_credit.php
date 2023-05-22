@@ -233,6 +233,12 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == 'ADMIN'){
                 let buttonPayment =
                     '<form id="payment-form" method="POST" action="./api/charge.php"><input type="hidden" name="omiseToken"><input type = "hidden" id = "amount" name = "amount" value = "100000"><p><button class="btn btn-outline-info btn-sm float-right" type="submit" id="checkout-button">PAY NOW</button></p> </form>';
 
+                // buttonPayment = ''; // remove here if credit card already
+
+                // if (data['payment_status'] == 1) {
+                //     buttonPayment = '';
+                // }
+
                 let classPaymentStatus = (data['payment_status'] == 1) ? 'text text-success' :
                     'text text-danger';
                 let messagePayment = (data['payment_status'] == 1) ? 'paid' :

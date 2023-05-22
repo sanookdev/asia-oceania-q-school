@@ -67,7 +67,8 @@
                 <div class="card-footer">
                     <!-- <a href="#" class="float-left" style="color:white!important;">Check Status
                         Register</a> -->
-                    <a href="../entry-pack.pdf" class="float-left" target="_blank" style="color:white!important;">Entry
+                    <a href="../entry-pack.pdf" class="float-left" target="_blank" style="color:white!important;">Latest
+                        Entry
                         Pack</a>
                     <a href="../entry-form" class="float-right" style="color:white!important;" id="entryform">Entry
                         Form</a>

@@ -32,6 +32,22 @@ if($_POST['action'] == 'checkLogin'){
 else if($_POST['action'] == 'listRegister'){
     $query = $service->listRegister();
     $result = $query;
+    for($i = 0 ; $i< count($result['data']) ; $i++){
+        $personal_id = $result['data'][$i]['id'];
+        $imagesDir = '../../uploads/profiles/'.$personal_id.'/';
+        $result['data'][$i]['listImg'] = glob($imagesDir . '*.*', GLOB_BRACE);
+        $checkPending = $result['data'][$i]['listImg'];
+        $result['data'][$i]['waitingConfirm'] = false;
+        $keyCheck = "bankDepositSlip";
+        if(count($checkPending) > 0){
+            for($j = 0 ; $j < count($checkPending) ; $j++){
+                if(strpos($checkPending[$j],$keyCheck)){
+                    $result['data'][$i]['waitingConfirm'] = true;
+                }
+            }
+        }
+    }
+
 }
 // completed
 
